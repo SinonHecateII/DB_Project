@@ -1,31 +1,37 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const PORT = 8080;
+const multer = require("multer");
+const fs = require("fs");
 
-app.use(express.json())
+app.listen(8080, () => {
+	const dir = "./uploads";
+    if(!fs.existsSync(dir)) {
+    	fs.mkdirSync(dir);
+    }
+    console.log("서버 실행");
+});
 
-app.listen(
-    PORT,
-    () => console.log(`Server is running on port ${PORT}`)
-)
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+});
 
-app.get('/tshirt', (req, res) => {
+const upload = multer({ storage: storage })
+
+app.post('/multipart', upload.array('img'), (req, res, next) => {
+
+    // console check
+    req.files.map((data) => {
+        console.log(data);
+    });
+    
     res.status(200).send({
-        "id": 1,
-        "name": "T-Shirt",
-        "price": 10.99,
+        message: "Ok",
+        fileInfo: req.files
     })
 });
 
-app.post('/tshirt/id', (req, res) => {
-    const { id } = req.params;
-    const { logo } = req.body;
-
-    if(!logo){
-        res.status(418).send({message:'We need a logo!'})
-    }
-
-    res.send({
-        tshirt: 'T-Shirt with your ${logo} and ID ${id}',
-    });
-});
