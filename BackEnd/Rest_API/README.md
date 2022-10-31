@@ -10,7 +10,7 @@
 
 
 
-> 이미지 url : [ip주소]/shareimage/[이미지이름].jpg
+> 이미지 url : http://dbproject.com/shareimage/[이미지이름].jpg
 
 API URL : https://test.loca.lt
 # POST
