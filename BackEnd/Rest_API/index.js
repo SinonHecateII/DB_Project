@@ -35,3 +35,10 @@ app.post('/upload', upload.array('img'), (req, res, next) => {
     })
 });
 
+app.get('/response', (req, res) => {
+    res.status(201).send({
+        "url": "https://test.loca.lt",
+        "status_code": 201,
+    })
+});
+

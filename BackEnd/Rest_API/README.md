@@ -19,3 +19,8 @@ API URL : https://test.loca.lt
 Key : "img", Value : [jpg형식의 파일]
 + status code 200
     > 파일 전송 성공
+
+# GET
+> /response
++ status code 201
+    > return 형식 : json
