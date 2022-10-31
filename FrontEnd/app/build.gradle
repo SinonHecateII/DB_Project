@@ -5,6 +5,9 @@ plugins {
 
 android {
     compileSdk 32
+    viewBinding {
+        enabled true
+    }
 
     defaultConfig {
         applicationId "com.example.deliciousfood"
@@ -48,4 +51,8 @@ dependencies {
 
     // json 변환 라이브러리
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+
+    // Glide - 이미지 라이브러리
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 }
