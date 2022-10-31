@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-app.post('/multipart', upload.array('img'), (req, res, next) => {
+app.post('/upload', upload.array('img'), (req, res, next) => {
 
     // console check
     req.files.map((data) => {
