@@ -6,11 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".pages.MainActivity">
 
-    <ImageView
-        android:id="@+id/iv_image_test"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_restaurant_add"
