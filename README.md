@@ -12,9 +12,12 @@
   - BackEnd(DB)
     - PHP(7.4.26)
     - MySQL
+    - IIS 
+      > 가상 디렉토리를 이용한 이미지 불러오기
 
   - BackEnd(Rest API)
     - node.js (express 4.18.1)
+      > For Post and Get
     - Insomnia (For test API)
   - FrontEnd
     - Android Studio
