@@ -1,6 +1,4 @@
-package com.example.deliciousfood.pages;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.deliciousfood.pages.session;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +11,8 @@ import com.example.deliciousfood.R;
 import com.example.deliciousfood.api.DeliciousAPI;
 import com.example.deliciousfood.api.dto.LoginDTO;
 import com.example.deliciousfood.api.dto.LoginResponseDTO;
+import com.example.deliciousfood.pages.MainActivity;
+import com.example.deliciousfood.utils.ParentActivity;
 import com.example.deliciousfood.utils.SharedPreferenceHelper;
 
 import retrofit2.Call;
