@@ -6,6 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".pages.MainActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_restaurant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vp_restaurant"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" />
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_restaurant_add"
@@ -13,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right|bottom"
         android:layout_margin="@dimen/gap_line_double"
+        android:foreground="?attr/selectableItemBackground"
         android:src="@drawable/ic_edit"
         android:tint="@color/white"
         app:backgroundTint="@color/main_color" />

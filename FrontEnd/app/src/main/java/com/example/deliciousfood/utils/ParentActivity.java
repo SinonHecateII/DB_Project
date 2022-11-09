@@ -1,4 +1,4 @@
-package com.example.deliciousfood.pages;
+package com.example.deliciousfood.utils;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +18,7 @@ public class ParentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_parent);
     }
 
-    void showProgress(Activity activity, String text) {
+    protected void showProgress(Activity activity, String text) {
         if(progressDialog != null) {
             progressDialog = null;
         }
@@ -30,7 +30,7 @@ public class ParentActivity extends AppCompatActivity {
         progressDialog.show();
     }
 
-    void hideProgress() {
+    protected void hideProgress() {
         if(progressDialog != null) {
             progressDialog.dismiss();
         }

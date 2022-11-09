@@ -1,7 +1,6 @@
-package com.example.deliciousfood.pages;
+package com.example.deliciousfood.pages.session;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -14,8 +13,8 @@ import com.example.deliciousfood.R;
 import com.example.deliciousfood.api.DeliciousAPI;
 import com.example.deliciousfood.api.dto.RegisterDTO;
 import com.example.deliciousfood.api.dto.RegisterResponseDTO;
+import com.example.deliciousfood.utils.ParentActivity;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
