@@ -1,31 +1,16 @@
 package com.example.deliciousfood.pages;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.Toast;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.bumptech.glide.Glide;
-import com.example.deliciousfood.R;
 import com.example.deliciousfood.adapter.RestaurantViewPagerAdapter;
 import com.example.deliciousfood.api.DeliciousAPI;
 import com.example.deliciousfood.databinding.ActivityMainBinding;
 import com.example.deliciousfood.utils.Constants;
-import com.example.deliciousfood.utils.SharedPreferenceHelper;
-import com.google.android.material.tabs.TabLayout;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,8 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // 상태바 숨기기
-        hideStatusBar();
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         // 뷰 바인딩
         // findViewById 대신 binding 으로 xml 객체와 java 코드 상 객체를 연결
@@ -76,12 +60,5 @@ public class MainActivity extends AppCompatActivity {
         binding.vpRestaurant.setAdapter(viewPagerAdapter); // Layout(xml) 의 ViewPager 객체에 어댑터를 set
         binding.tlRestaurant.setupWithViewPager(binding.vpRestaurant); // Layout(xml) 의 TabLayout 을 ViewPager 객체와 연동함
 
-    }
-
-    private void hideStatusBar() {
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
-        // Remember that you should never show the action bar if the
-        // status bar is hidden, so hide that too if necessary.
-        getActionBar().hide();
     }
 }
