@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/workspace/cheonanDelicious/FrontEnd/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
+        <entry key="..\:/workspace/cheonanDelicious/FrontEnd/app/src/main/res/layout/dialog_progress.xml" value="0.3496376811594203" />
         <entry key="..\:/workspace/cheonanDelicious/FrontEnd/app/src/main/res/layout/fragment_restaurant.xml" value="0.18020833333333333" />
+        <entry key="..\:/workspace/cheonanDelicious/FrontEnd/app/src/main/res/layout/item_restaurant.xml" value="0.3491847826086957" />
       </map>
     </option>
   </component>

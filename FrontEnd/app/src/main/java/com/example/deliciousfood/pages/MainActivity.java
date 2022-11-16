@@ -21,10 +21,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // 상태바 숨기기
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+        
         // 뷰 바인딩
         // findViewById 대신 binding 으로 xml 객체와 java 코드 상 객체를 연결
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -40,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         restaurantName.add("두정역 인근");
         restaurantName.add("신부동");
         restaurantName.add("불당 카페거리");
+        restaurantName.add("공주대 천안캠");
 
         // ViewPager 에 쓸 프래그먼트
         ArrayList<Fragment> fragments = new ArrayList<>();
