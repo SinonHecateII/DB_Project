@@ -32,29 +32,24 @@ public class MainActivity extends AppCompatActivity {
 
 
         // 위치
-        ArrayList<String> restaurantName = new ArrayList<>();
-        restaurantName.add("두정 먹자골목");
-        restaurantName.add("두정역 인근");
-        restaurantName.add("천안 터미널 (야우리)");
-        restaurantName.add("불당 카페거리");
-        restaurantName.add("공주대 천안캠");
-        restaurantName.add("두정역 - 먹자골목 사이");
+        String[] locations = Constants.locations;
+
 
         // ViewPager 에 쓸 프래그먼트
         ArrayList<Fragment> fragments = new ArrayList<>();
 
-        for (int i = 0; i < restaurantName.size(); i++) {
+        for (int i = 0; i < locations.length; i++) {
             fragments.add(new RestaurantFragment());
 
             // 액티비티 -> 프래그먼트 값 전달
             // 번들에 String 값을 입력하고 Argument 로 번들을 전달함
             Bundle bundle = new Bundle();
-            bundle.putString(Constants.ARGUMENT_LOCATION, restaurantName.get(i));
+            bundle.putString(Constants.ARGUMENT_LOCATION, locations[i]);
             fragments.get(i).setArguments(bundle);
         }
 
         // 뷰페이저 어댑터
-        RestaurantViewPagerAdapter viewPagerAdapter = new RestaurantViewPagerAdapter(fragments, restaurantName, getSupportFragmentManager());
+        RestaurantViewPagerAdapter viewPagerAdapter = new RestaurantViewPagerAdapter(fragments, locations, getSupportFragmentManager());
 
         binding.vpRestaurant.setAdapter(viewPagerAdapter); // Layout(xml) 의 ViewPager 객체에 어댑터를 set
         binding.tlRestaurant.setupWithViewPager(binding.vpRestaurant); // Layout(xml) 의 TabLayout 을 ViewPager 객체와 연동함

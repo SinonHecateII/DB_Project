@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 
 class RestaurantViewPagerAdapter(
     private val fragments: ArrayList<Fragment>,
-    private val fragmentTitles: ArrayList<String>,
+    private val fragmentTitles: Array<String>,
     fm: FragmentManager
 ) :
     FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
