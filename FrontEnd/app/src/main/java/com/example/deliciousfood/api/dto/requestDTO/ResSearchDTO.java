@@ -3,7 +3,7 @@ package com.example.deliciousfood.api.dto.requestDTO;
 import com.google.gson.annotations.SerializedName;
 
 public class ResSearchDTO {
-    @SerializedName("id")
+    @SerializedName("location")
     private String location;
 
     public ResSearchDTO(String location) {

@@ -64,20 +64,14 @@ public class RestaurantFragment extends Fragment {
 
         ArrayList<String> tempMenu = new ArrayList<String>();
 
-        restaurantList.add(new RestaurantModel("한솥", null, "평범", tempMenu));
-        restaurantList.add(new RestaurantModel("강나루", null, "평범", tempMenu));
+        ResSearchDTO resSearchDTO = new ResSearchDTO(location);
 
-        Call<RestaurantResponseDTO> restaurantSearchCall = deliciousAPI.restaurantSearchCall(location);
+        Call<RestaurantResponseDTO> restaurantSearchCall = deliciousAPI.restaurantSearchCall(resSearchDTO);
         restaurantSearchCall.enqueue(new Callback<RestaurantResponseDTO>() {
             @Override
             public void onResponse(Call<RestaurantResponseDTO> call, Response<RestaurantResponseDTO> response) {
                 if (response.isSuccessful()) {
-                    Log.d(TAG, "onResponse: Point1");
-                    Log.d(TAG, "onResponse: " + response.toString());
-                    Log.d(TAG, "onResponse: " + response.body().toString());
-                    Log.d(TAG, "onResponse: " + response.body().getResult().size());
                     RestaurantResponseDTO restaurantResponseDTO = response.body();
-                    Log.d(TAG, "onResponse: ${" + restaurantResponseDTO + "}");
                     if (restaurantResponseDTO != null) {
                         for (int i = 0; i < restaurantResponseDTO.getResult().size(); i++) {
                             restaurantList.add(

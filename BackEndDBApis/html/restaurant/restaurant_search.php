@@ -1,21 +1,22 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
-header("Content-type: text/html; charset=euc-kr");
+header('Content-Type: application/json');
 
 
 include("../secret_constant.php");
 ini_set("display_errors", 0);
 
-mysqli_query($con, 'SET NAMES utf8');
+
 
 $data = json_decode(file_get_contents('php://input'), true);
 
-$headers = apache_request_headers();
-$location = $headers["location"];
-$select_sql = "select * from restaurant where location = '$location'";
+$location = $data["location"];
+mysqli_query("set session character_set_connection=utf8;");
+mysqli_query("set session character_set_results=utf8;");
+mysqli_query("set session character_set_client=utf8;");
 
+$select_sql = "select * from restaurant where location = '$location'";
 $response = array();
-header('Content-Type: application/json');
 
 $select_sql_result = mysqli_query($con, $select_sql);
 
