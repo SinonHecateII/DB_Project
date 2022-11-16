@@ -1,9 +1,9 @@
 package com.example.deliciousfood.api;
 
-import com.example.deliciousfood.api.dto.LoginDTO;
-import com.example.deliciousfood.api.dto.LoginResponseDTO;
-import com.example.deliciousfood.api.dto.RegisterDTO;
-import com.example.deliciousfood.api.dto.RegisterResponseDTO;
+import com.example.deliciousfood.api.dto.requestDTO.LoginDTO;
+import com.example.deliciousfood.api.dto.responseDTO.LoginResponseDTO;
+import com.example.deliciousfood.api.dto.requestDTO.RegisterDTO;
+import com.example.deliciousfood.api.dto.responseDTO.RegisterResponseDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

@@ -35,9 +35,10 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> restaurantName = new ArrayList<>();
         restaurantName.add("두정 먹자골목");
         restaurantName.add("두정역 인근");
-        restaurantName.add("신부동");
+        restaurantName.add("천안 터미널 (야우리)");
         restaurantName.add("불당 카페거리");
         restaurantName.add("공주대 천안캠");
+        restaurantName.add("두정역 - 먹자골목 사이");
 
         // ViewPager 에 쓸 프래그먼트
         ArrayList<Fragment> fragments = new ArrayList<>();

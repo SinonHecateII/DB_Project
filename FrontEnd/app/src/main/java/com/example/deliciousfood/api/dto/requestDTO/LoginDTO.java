@@ -1,4 +1,4 @@
-package com.example.deliciousfood.api.dto;
+package com.example.deliciousfood.api.dto.requestDTO;
 
 import com.google.gson.annotations.SerializedName;
 

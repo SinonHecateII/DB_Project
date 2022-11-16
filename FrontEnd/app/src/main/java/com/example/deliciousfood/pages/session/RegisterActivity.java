@@ -11,8 +11,8 @@ import android.widget.Toast;
 
 import com.example.deliciousfood.R;
 import com.example.deliciousfood.api.DeliciousAPI;
-import com.example.deliciousfood.api.dto.RegisterDTO;
-import com.example.deliciousfood.api.dto.RegisterResponseDTO;
+import com.example.deliciousfood.api.dto.requestDTO.RegisterDTO;
+import com.example.deliciousfood.api.dto.responseDTO.RegisterResponseDTO;
 import com.example.deliciousfood.utils.ParentActivity;
 
 import retrofit2.Call;

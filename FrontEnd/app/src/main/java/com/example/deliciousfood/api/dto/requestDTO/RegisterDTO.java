@@ -1,26 +1,22 @@
-package com.example.deliciousfood.api.dto;
+package com.example.deliciousfood.api.dto.requestDTO;
 
-public class LoginResponseDTO {
-    boolean success;
-    String id;
-    String password;
-    String name;
-    String email;
+import com.google.gson.annotations.SerializedName;
 
-    public LoginResponseDTO(boolean success, String id, String password, String name, String email) {
-        this.success = success;
+public class RegisterDTO {
+    @SerializedName("id")
+    private String id;
+    @SerializedName("password")
+    private String password;
+    @SerializedName("name")
+    private String name;
+    @SerializedName("email")
+    private String email;
+
+    public RegisterDTO(String id, String password, String name, String email) {
         this.id = id;
         this.password = password;
         this.name = name;
         this.email = email;
-    }
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
     }
 
     public String getId() {

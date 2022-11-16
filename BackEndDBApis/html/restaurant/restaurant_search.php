@@ -1,4 +1,8 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
+header("Content-type: text/html; charset=euc-kr");
+
+
 include("../secret_constant.php");
 ini_set("display_errors", 0);
 
@@ -6,8 +10,8 @@ mysqli_query($con, 'SET NAMES utf8');
 
 $data = json_decode(file_get_contents('php://input'), true);
 
-$location = $data["location"];
-
+$headers = apache_request_headers();
+$location = $headers["location"];
 $select_sql = "select * from restaurant where location = '$location'";
 
 $response = array();

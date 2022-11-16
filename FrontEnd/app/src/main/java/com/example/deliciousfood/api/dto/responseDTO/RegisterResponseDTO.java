@@ -1,4 +1,4 @@
-package com.example.deliciousfood.api.dto;
+package com.example.deliciousfood.api.dto.responseDTO;
 
 public class RegisterResponseDTO {
     String result;
