@@ -2,6 +2,7 @@ package com.example.deliciousfood.utils;
 
 public class Constants {
     public final static String ARGUMENT_LOCATION = "location";
+    public final static String INTENT_EXTRA_RESTAURANT_ID = "restaurant_id";
 
     public final static String[] locations = {
             "천안 터미널 (야우리)",

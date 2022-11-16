@@ -9,10 +9,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:orientation="vertical">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_restaurant"
+            android:background="@color/white"
+            android:elevation="2dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

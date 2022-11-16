@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.deliciousfood.R;
 
@@ -28,6 +29,11 @@ public class ParentActivity extends AppCompatActivity {
         ((TextView)progressDialog.findViewById(R.id.tv_dialog_progress)).setText(text);
         progressDialog.setCancelable(false);
         progressDialog.show();
+    }
+
+
+    protected void showShortToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     protected void hideProgress() {

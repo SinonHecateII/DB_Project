@@ -14,6 +14,8 @@
     <dimen name="gap_vertical">30dp</dimen>
     <dimen name="gap_line">10dp</dimen>
     <dimen name="gap_line_double">20dp</dimen>
+    <dimen name="gap_drawable_padding">10dp</dimen>
+
     <dimen name="text_box_padding">20dp</dimen>
 
     <dimen name="btn_full_height">50dp</dimen>

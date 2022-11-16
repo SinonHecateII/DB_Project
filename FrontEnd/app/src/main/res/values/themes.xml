@@ -23,6 +23,8 @@
         <!-- 일반적인 tint 색상 -->
         <item name="android:colorAccent">@color/main_color</item>
 
+        <item name="android:windowLightStatusBar">true</item>
+
     </style>
 
     <style name="customBtnStyle" parent="TextAppearance.AppCompat.Button">

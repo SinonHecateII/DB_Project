@@ -17,16 +17,19 @@
         android:theme="@style/Theme.DeliciousFood"
         tools:targetApi="31">
         <activity
+            android:name=".pages.RestaurantActivity"
+            android:exported="false" />
+        <activity
             android:name=".utils.ParentActivity"
             android:exported="false" />
         <activity
             android:name=".pages.session.RegisterActivity"
             android:exported="false" />
         <activity
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"
             android:name=".pages.session.LoginActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

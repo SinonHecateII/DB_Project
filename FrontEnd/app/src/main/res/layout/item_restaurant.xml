@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/gap_line_double"
+    android:layout_marginHorizontal="@dimen/gap_line_double"
+    android:layout_marginVertical="@dimen/gap_line"
     app:cardCornerRadius="10dp">
 
     <LinearLayout
@@ -17,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/img_food_sample" />
+            android:src="@drawable/img_food_photo_not_exist" />
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -1,7 +1,9 @@
 package com.example.deliciousfood.pages;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -52,8 +54,21 @@ public class RestaurantFragment extends Fragment {
         }
 
         getRestaurantList();
+        setUpRecyclerClickEvent();
 
         return binding.getRoot();
+    }
+
+    public void setUpRecyclerClickEvent() {
+        restaurantAdapter.setOnItemClickListener(new RestaurantAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull RestaurantModel model) {
+                Intent intent = new Intent(requireContext(), RestaurantActivity.class);
+                Log.d(TAG, "onItemClick point1: " + model.getRestaurantId());
+                intent.putExtra(Constants.INTENT_EXTRA_RESTAURANT_ID, model.getRestaurantId());
+                startActivity(intent);
+            }
+        });
     }
 
     public void getRestaurantList() {
@@ -76,8 +91,9 @@ public class RestaurantFragment extends Fragment {
                         for (int i = 0; i < restaurantResponseDTO.getResult().size(); i++) {
                             restaurantList.add(
                                     new RestaurantModel(
+                                            Integer.parseInt(restaurantResponseDTO.getResult().get(i).getRestaurantID()),
                                             restaurantResponseDTO.getResult().get(i).getName(),
-                                            null,
+                                            Integer.parseInt(restaurantResponseDTO.getResult().get(i).getPhotoCnt()),
                                             restaurantResponseDTO.getResult().get(i).getMood(),
                                             tempMenu));
                         }
