@@ -5,7 +5,8 @@
 CREATE TABLE Menu(
     restaurantID INT NOT NULL,
     Type VARCHAR(10),
-    FOREIGN KEY (restaurantID) REFERENCES restaurant(restaurantID)
+    FOREIGN KEY (restaurantID)
+    REFERENCES restaurant(restaurantID)
 );
 ```
 ```

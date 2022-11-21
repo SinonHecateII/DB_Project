@@ -12,7 +12,7 @@
 
 > 이미지 url : http://dbproject.com/shareimage/[이미지이름].jpg
 
-API URL : https://test.loca.lt
+API URL : https://dbproject6763.loca.lt
 # POST
 > /upload
 
