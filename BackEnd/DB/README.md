@@ -4,7 +4,7 @@
 
 CREATE TABLE Menu(
     restaurantID INT NOT NULL,
-    menuType VARCHAR(10),
+    Type VARCHAR(10),
     FOREIGN KEY (restaurantID)
     REFERENCES restaurant(restaurantID)
 );
