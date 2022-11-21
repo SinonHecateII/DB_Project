@@ -4,7 +4,7 @@ const multer = require("multer");
 const fs = require("fs");
 
 app.listen(8080, () => {
-	const dir = "./uploads";
+	const dir = "uploads";
     if(!fs.existsSync(dir)) {
     	fs.mkdirSync(dir);
     }
