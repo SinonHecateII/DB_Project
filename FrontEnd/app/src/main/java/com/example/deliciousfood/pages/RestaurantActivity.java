@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.deliciousfood.api.DeliciousAPI;
 import com.example.deliciousfood.api.dto.requestDTO.ResIdSearchDTO;
 import com.example.deliciousfood.api.dto.responseDTO.Result;
@@ -31,13 +32,24 @@ public class RestaurantActivity extends ParentActivity {
         setContentView(binding.getRoot());
 
         restaurantId = getIntent().getIntExtra(Constants.INTENT_EXTRA_RESTAURANT_ID, -1);
-        Log.d("ASDFADAF" ,"onItemClick point1: " + restaurantId);
         if (restaurantId == -1) {
             showShortToast("restaurantId 전달 에러");
             finish();
         }
 
         getRestaurantModel();
+        getImage();
+    }
+
+    private void getImage() {
+        try {
+            // Glide 로 서버에서 이미지를 가져올 때 간혹 서버에 이미지가 없을 경우 nullPointException 을 일으키기 때문에
+            // try - catch 로 잡아줌
+            String imageUri = "http://210.125.212.207/shareimage/" + restaurantId + "_img0.jpg";
+            Glide.with(getApplicationContext()).load(imageUri).into(binding.ivRestaurantImage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void getRestaurantModel() {
