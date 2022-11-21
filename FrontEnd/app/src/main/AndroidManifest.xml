@@ -17,6 +17,9 @@
         android:theme="@style/Theme.DeliciousFood"
         tools:targetApi="31">
         <activity
+            android:name=".RestaurantAddActivity"
+            android:exported="false" />
+        <activity
             android:name=".pages.RestaurantActivity"
             android:exported="false" />
         <activity
