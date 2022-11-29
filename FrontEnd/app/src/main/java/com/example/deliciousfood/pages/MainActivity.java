@@ -1,14 +1,19 @@
 package com.example.deliciousfood.pages;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.deliciousfood.R;
 import com.example.deliciousfood.adapter.RestaurantViewPagerAdapter;
 import com.example.deliciousfood.api.DeliciousAPI;
 import com.example.deliciousfood.databinding.ActivityMainBinding;
+import com.example.deliciousfood.pages.session.MyPageActivity;
 import com.example.deliciousfood.utils.Constants;
 
 import java.util.ArrayList;
@@ -54,5 +59,19 @@ public class MainActivity extends AppCompatActivity {
         binding.vpRestaurant.setAdapter(viewPagerAdapter); // Layout(xml) 의 ViewPager 객체에 어댑터를 set
         binding.tlRestaurant.setupWithViewPager(binding.vpRestaurant); // Layout(xml) 의 TabLayout 을 ViewPager 객체와 연동함
 
+
+        binding.toolbarRegister.findViewById(R.id.menu_mypage).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MyPageActivity.class));
+            }
+        });
+
+        binding.toolbarRegister.findViewById(R.id.menu_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "검색 버튼 클릭",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

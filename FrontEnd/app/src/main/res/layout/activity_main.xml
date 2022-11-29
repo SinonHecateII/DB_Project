@@ -9,15 +9,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:elevation="3dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/toolbar_main"
+            app:title="천안 골목식당" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_restaurant"
-            android:background="@color/white"
-            android:elevation="2dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:elevation="3dp" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/vp_restaurant"
