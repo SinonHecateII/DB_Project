@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".pages.session.MyPageActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_mypage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/obj_mypage_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/gap_line_double"
+        android:paddingTop="@dimen/gap_line_double">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="@integer/material_motion_duration_long_1"
+                android:text="@string/obj_mypage_nickname" />
+
+            <TextView
+                android:id="@+id/tv_mypage_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_gray_10"
+                android:drawableRight="@drawable/ic_edit"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="@dimen/gap_line"
+                android:paddingVertical="8dp"
+                android:textStyle="bold"
+                tools:text="항상배고픈헝가리" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_mypage_password_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_line"
+            android:text="@string/obj_mypage_password_change" />
+
+        <TextView
+            android:id="@+id/tv_mypage_withdrawal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_line"
+            android:text="@string/obj_mypage_withdrawal" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="@dimen/gap_vertical"
+            android:background="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/obj_mypage_review" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_mypage_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_gray_10"
+                android:drawableRight="@drawable/ic_arrow_right_resize"
+                android:drawablePadding="@dimen/gap_line"
+                android:foreground="?attr/selectableItemBackground"
+                android:paddingHorizontal="@dimen/gap_line"
+                android:paddingVertical="8dp"
+                android:textColor="@color/black"
+                tools:text="총 5건" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_line"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/obj_mypage_restaurant" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_mypage_restaurant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_gray_10"
+                android:drawableRight="@drawable/ic_arrow_right_resize"
+                android:drawablePadding="@dimen/gap_line"
+                android:foreground="?attr/selectableItemBackground"
+                android:paddingHorizontal="@dimen/gap_line"
+                android:paddingVertical="8dp"
+                android:textColor="@color/black"
+                tools:text="총 5건" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="@dimen/gap_vertical"
+            android:background="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/obj_mypage_version" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ver 1.0"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
