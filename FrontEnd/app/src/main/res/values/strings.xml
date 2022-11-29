@@ -2,4 +2,13 @@
     <string name="app_name">DeliciousFood</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- 마이 페이지 -->
+    <string name="obj_mypage_nickname">닉네임</string>
+    <string name="obj_mypage_title">마이페이지</string>
+    <string name="obj_mypage_password_change">비밀번호 변경</string>
+    <string name="obj_mypage_withdrawal">회원 탈퇴하기</string>
+    <string name="obj_mypage_review">내가 작성한 리뷰</string>
+    <string name="obj_mypage_restaurant">내가 등록한 가게</string>
+    <string name="obj_mypage_version">현재 버전</string>
 </resources>
