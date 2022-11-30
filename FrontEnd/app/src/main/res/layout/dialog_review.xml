@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/round_white_10"
+    android:orientation="vertical"
+    android:padding="@dimen/gap_vertical">
+
+    <TextView
+        android:id="@+id/tv_review_restaurant_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_20"
+        android:textStyle="bold"
+        tools:text="AAA 가게" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RatingBar
+            android:id="@+id/rb_review_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:rating="3.5"
+            android:stepSize="1"
+            android:progressBackgroundTint="@color/main_color_bright"
+            android:progressTint="@color/main_color"
+            android:transformPivotX="0dp"
+            android:transformPivotY="0dp" />
+
+        <TextView
+            android:id="@+id/tv_text_len"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:gravity="right"
+            tools:text="0 / 100" />
+
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/et_review_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/gap_line"
+        android:background="@drawable/et_gray_box"
+        android:gravity="top"
+        android:hint="리뷰 내용을 작성해주세요"
+        android:minLines="4"
+        android:padding="@dimen/gap_line"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/btn_review_finish"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_full_height"
+        android:layout_marginTop="@dimen/gap_line"
+        android:background="@drawable/btn_main_5"
+        android:text="리뷰 등록하기" />
+
+</LinearLayout>
