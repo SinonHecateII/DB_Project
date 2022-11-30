@@ -12,4 +12,8 @@ public class Constants {
             "두정 먹자골목",
             "공주대 천안캠"
     };
+
+    // Request Code
+    public final static int REQUEST_CODE_GALLERY = 100;
+
 }

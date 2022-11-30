@@ -28,12 +28,13 @@
             android:layout_margin="@dimen/gap_horizontal"
             android:orientation="vertical">
 
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/iv_restaurant_image"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="250dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/img_food_sample" />
+                android:src="@drawable/img_food_sample"
+                app:riv_corner_radius="15dp" />
 
             <TextView
                 android:id="@+id/tv_photo_add"
@@ -44,7 +45,7 @@
                 android:drawablePadding="10dp"
                 android:foreground="?attr/selectableItemBackground"
                 android:gravity="center"
-                android:text="가게 등록하기" />
+                android:text="사진 첨부하기" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -85,7 +86,7 @@
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="@dimen/btn_full_height"
                     android:layout_marginLeft="@dimen/gap_line"
                     android:background="@drawable/et_box" />
             </LinearLayout>
@@ -99,9 +100,6 @@
                 android:text="대표메뉴" />
 
 
-
         </LinearLayout>
-
     </ScrollView>
-
 </LinearLayout>

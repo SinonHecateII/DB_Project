@@ -58,4 +58,8 @@ dependencies {
 
     // ViewPager 2
     implementation 'androidx.viewpager2:viewpager2:1.1.0-beta01'
+
+    // 이미지 라운딩 라이브러리
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
 }
