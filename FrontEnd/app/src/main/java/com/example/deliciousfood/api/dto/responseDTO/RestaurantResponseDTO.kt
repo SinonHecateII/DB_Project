@@ -1,10 +1,10 @@
 package com.example.deliciousfood.api.dto.responseDTO
 
 data class RestaurantResponseDTO(
-    val result: List<Result>
+    val result: List<RestaurantResponseModel>
 )
 
-data class Result(
+data class RestaurantResponseModel(
     val location: String,
     val mood: String,
     val name: String,

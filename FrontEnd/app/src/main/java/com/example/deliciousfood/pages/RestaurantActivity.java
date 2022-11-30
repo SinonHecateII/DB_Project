@@ -8,14 +8,15 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.deliciousfood.R;
 import com.example.deliciousfood.adapter.ReviewAdapter;
 import com.example.deliciousfood.api.DeliciousAPI;
 import com.example.deliciousfood.api.dto.requestDTO.ResIdSearchDTO;
-import com.example.deliciousfood.api.dto.responseDTO.Result;
+import com.example.deliciousfood.api.dto.responseDTO.RestaurantResponseDTO;
+import com.example.deliciousfood.api.dto.responseDTO.RestaurantResponseModel;
+import com.example.deliciousfood.api.dto.responseDTO.ReviewSearchResponseDTO;
 import com.example.deliciousfood.databinding.ActivityRestaurantBinding;
 import com.example.deliciousfood.models.ReviewModel;
 import com.example.deliciousfood.utils.Constants;
@@ -35,7 +36,7 @@ public class RestaurantActivity extends ParentActivity {
     private ArrayList<ReviewModel> reviewModels = new ArrayList<>();
     private ReviewAdapter reviewAdapter;
     private ResIdSearchDTO resIdSearchDTO;
-    private Result restaurantModel;
+    private RestaurantResponseModel restaurantModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,6 @@ public class RestaurantActivity extends ParentActivity {
 
         getRestaurantModel();
         getImage();
-        setUpReviewRecyclerView();
     }
 
     private void openReview() {
@@ -99,15 +99,31 @@ public class RestaurantActivity extends ParentActivity {
     }
 
 
-
-
     private void setUpReviewRecyclerView() {
         binding.rvReview.setAdapter(reviewAdapter);
 
-        reviewModels.add(new ReviewModel("사용자 1", 3, "맛있어요"));
-        reviewModels.add(new ReviewModel("사용자 2", 4, "맛있어요222"));
-        reviewModels.add(new ReviewModel("사용자 3", 1, "맛있어요333"));
+        deliciousAPI.reviewSearchCall(restaurantModel.getRestaurantID()).enqueue(new Callback<ReviewSearchResponseDTO>() {
+            @Override
+            public void onResponse(Call<ReviewSearchResponseDTO> call, Response<ReviewSearchResponseDTO> response) {
+                if (response.isSuccessful()) {
+                    ReviewSearchResponseDTO reviewSearchResponseDTO = response.body();
+                    if (reviewSearchResponseDTO != null) {
 
+                        reviewSearchResponseDTO.getResult().forEach(review -> {
+                            reviewModels.add(new ReviewModel(review.getNickname(), Float.parseFloat(review.getScore()), review.getContent()));
+                        });
+
+                        reviewAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ReviewSearchResponseDTO> call, Throwable t) {
+
+            }
+        });
+        
         reviewAdapter.notifyDataSetChanged();
     }
 
@@ -124,17 +140,19 @@ public class RestaurantActivity extends ParentActivity {
 
     private void getRestaurantModel() {
         ResIdSearchDTO resIdSearchDTO = new ResIdSearchDTO(restaurantId);
-        Call<Result> restaurantIdCall = deliciousAPI.restaurantSearchIdCall(resIdSearchDTO);
+        Call<RestaurantResponseModel> restaurantIdCall = deliciousAPI.restaurantSearchIdCall(resIdSearchDTO);
 
-        restaurantIdCall.enqueue(new Callback<Result>() {
+        restaurantIdCall.enqueue(new Callback<RestaurantResponseModel>() {
             @Override
-            public void onResponse(Call<Result> call, Response<Result> response) {
+            public void onResponse(Call<RestaurantResponseModel> call, Response<RestaurantResponseModel> response) {
                 if (response.isSuccessful()) {
                     restaurantModel = response.body();
                     if (restaurantModel != null) {
                         binding.tvRestaurantMood.setText(restaurantModel.getMood());
                         binding.tvRestaurantTitle.setText(restaurantModel.getName());
                         binding.tvRestaurantLocation.setText(restaurantModel.getLocation());
+
+                        setUpReviewRecyclerView();
                     } else {
                         showShortToast("식당 정보를 불러오는데 실패했습니다.");
                     }
@@ -144,7 +162,7 @@ public class RestaurantActivity extends ParentActivity {
             }
 
             @Override
-            public void onFailure(Call<Result> call, Throwable t) {
+            public void onFailure(Call<RestaurantResponseModel> call, Throwable t) {
 
             }
         });
