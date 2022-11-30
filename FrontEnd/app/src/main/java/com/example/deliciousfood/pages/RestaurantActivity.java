@@ -14,6 +14,8 @@ import com.example.deliciousfood.R;
 import com.example.deliciousfood.adapter.ReviewAdapter;
 import com.example.deliciousfood.api.DeliciousAPI;
 import com.example.deliciousfood.api.dto.requestDTO.ResIdSearchDTO;
+import com.example.deliciousfood.api.dto.requestDTO.ReviewDTO;
+import com.example.deliciousfood.api.dto.responseDTO.OnlyResultDTO;
 import com.example.deliciousfood.api.dto.responseDTO.RestaurantResponseDTO;
 import com.example.deliciousfood.api.dto.responseDTO.RestaurantResponseModel;
 import com.example.deliciousfood.api.dto.responseDTO.ReviewSearchResponseDTO;
@@ -21,6 +23,7 @@ import com.example.deliciousfood.databinding.ActivityRestaurantBinding;
 import com.example.deliciousfood.models.ReviewModel;
 import com.example.deliciousfood.utils.Constants;
 import com.example.deliciousfood.utils.ParentActivity;
+import com.example.deliciousfood.utils.SharedPreferenceHelper;
 
 import java.util.ArrayList;
 
@@ -80,8 +83,9 @@ public class RestaurantActivity extends ParentActivity {
             @Override
             public void onClick(View view) {
                 String reviewContent = ((TextView) reviewDialog.findViewById(R.id.et_review_content)).getText().toString();
+                int score = (int) ((RatingBar) reviewDialog.findViewById(R.id.rb_review_rating)).getRating();
 
-                // TODO: 2022-11-30 리뷰 등록하기
+                onReviewAdd(reviewContent, score);
 
 
                 reviewDialog.dismiss();
@@ -96,6 +100,41 @@ public class RestaurantActivity extends ParentActivity {
         });
 
         reviewDialog.show();
+    }
+
+
+    private void onReviewAdd(String content, int score) {
+        ReviewDTO reviewDTO = new ReviewDTO(
+                content,
+                score,
+                Integer.parseInt(restaurantModel.getRestaurantID()),
+                SharedPreferenceHelper.INSTANCE.getLoginID(getApplicationContext()),
+                System.currentTimeMillis()
+        );
+
+        deliciousAPI.reviewAddCall(reviewDTO).enqueue(new Callback<OnlyResultDTO>() {
+            @Override
+            public void onResponse(Call<OnlyResultDTO> call, Response<OnlyResultDTO> response) {
+                if (response.isSuccessful()) {
+                    showShortToast(response.body().getResult());
+
+                    reviewModels.add(new ReviewModel(
+                            SharedPreferenceHelper.INSTANCE.getNickname(getApplicationContext()),
+                            score,
+                            content));
+                    reviewAdapter.notifyDataSetChanged();
+
+                } else {
+                    showShortToast("리뷰 등록 실패");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OnlyResultDTO> call, Throwable t) {
+                showShortToast("리뷰 등록 실패");
+            }
+        });
+
     }
 
 
@@ -123,7 +162,7 @@ public class RestaurantActivity extends ParentActivity {
 
             }
         });
-        
+
         reviewAdapter.notifyDataSetChanged();
     }
 
