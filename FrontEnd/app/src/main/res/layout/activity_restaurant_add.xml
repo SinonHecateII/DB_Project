@@ -20,7 +20,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,14 +34,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/img_food_sample"
+                android:src="@drawable/img_food_photo_not_exist"
+                app:riv_border_color="@color/gray"
+                app:riv_border_width="1dp"
                 app:riv_corner_radius="15dp" />
 
             <TextView
                 android:id="@+id/tv_photo_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_line"
+                android:layout_marginTop="@dimen/gap_line_double"
                 android:drawableLeft="@drawable/ic_photo_add"
                 android:drawablePadding="10dp"
                 android:foreground="?attr/selectableItemBackground"
@@ -54,19 +57,21 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginRight="10dp"
                     android:drawableLeft="@drawable/ic_location"
                     android:drawablePadding="10dp"
-                    android:gravity="center"
+                    android:gravity="center_vertical|left"
                     android:text="위치" />
 
                 <Spinner
                     android:id="@+id/sp_location"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/btn_full_height" />
+                    android:layout_height="40dp"
+                    android:layout_marginVertical="@dimen/gap_line"
+                    android:background="@drawable/et_gray_box" />
 
             </LinearLayout>
 
@@ -76,7 +81,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:drawableLeft="@drawable/ic_smile"
@@ -86,20 +91,53 @@
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/btn_full_height"
+                    android:layout_height="40dp"
+                    android:layout_marginVertical="@dimen/margin_10"
                     android:layout_marginLeft="@dimen/gap_line"
-                    android:background="@drawable/et_box" />
+                    android:background="@drawable/et_gray_box" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_line"
+                android:layout_marginTop="@dimen/margin_20"
                 android:drawableLeft="@drawable/ic_dish"
                 android:drawablePadding="10dp"
                 android:text="대표메뉴" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_line"
+                android:orientation="horizontal">
 
+                <EditText
+                    android:id="@+id/et_menu_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/btn_full_height"
+                    android:layout_marginRight="@dimen/margin_10"
+                    android:layout_weight="1"
+                    android:background="@drawable/et_gray_box"
+                    android:hint="추가할 메뉴를 입력하세요"
+                    android:paddingHorizontal="@dimen/gap_line" />
+
+                <Button
+                    android:id="@+id/btn_menu_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/btn_full_height"
+                    android:background="@drawable/btn_main_bright_10"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:paddingHorizontal="@dimen/gap_line"
+                    android:text="추가하기"
+                    android:textColor="@color/main_color" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_full_height"
+        android:background="@drawable/btn_main_square"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="가게 등록하기" />
 </LinearLayout>
