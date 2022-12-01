@@ -19,6 +19,7 @@
         app:title="가게 등록하기" />
 
     <ScrollView
+        android:id="@+id/sv_main_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
@@ -86,7 +87,7 @@
                     android:layout_gravity="center"
                     android:drawableLeft="@drawable/ic_smile"
                     android:drawablePadding="10dp"
-                    android:gravity="center"
+                    android:gravity="left|center_vertical"
                     android:text="분위기" />
 
                 <EditText
@@ -131,6 +132,15 @@
                     android:text="추가하기"
                     android:textColor="@color/main_color" />
             </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_menu_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_line"
+                android:paddingBottom="50dp"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_menu_removable" />
         </LinearLayout>
     </ScrollView>
 
@@ -140,4 +150,5 @@
         android:background="@drawable/btn_main_square"
         android:foreground="?attr/selectableItemBackground"
         android:text="가게 등록하기" />
+
 </LinearLayout>
