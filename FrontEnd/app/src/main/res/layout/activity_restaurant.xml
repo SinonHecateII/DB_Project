@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray"
     tools:context=".pages.RestaurantActivity">
 
     <LinearLayout
@@ -11,104 +12,111 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/iv_restaurant_image"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/img_food_photo_not_exist" />
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_line_double"
-            android:orientation="vertical"
-            android:paddingHorizontal="@dimen/gap_line_double">
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:paddingBottom="@dimen/gap_line_double"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_restaurant_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_20"
-                android:textStyle="bold"
-                tools:text="Restaurant Title" />
-
-
-            <TextView
-                android:id="@+id/tv_restaurant_stars"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_line"
-                tools:text="4.3" />
-
-            <TextView
-                android:id="@+id/tv_restaurant_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_line"
-                android:drawableLeft="@drawable/ic_location"
-                android:drawablePadding="@dimen/gap_drawable_padding"
-                android:gravity="center"
-                android:textStyle="bold"
-                tools:text="두정 먹자골목" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_line"
-                android:drawableLeft="@drawable/ic_smile"
-                android:drawablePadding="@dimen/gap_drawable_padding"
-                android:gravity="center"
-                android:text="분위기"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tv_restaurant_mood"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_line"
-                android:background="@drawable/round_light_main_10"
-                android:padding="@dimen/gap_line"
-                tools:text="# 시끄러움" />
+            <ImageView
+                android:id="@+id/iv_restaurant_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_food_photo_not_exist" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_vertical"
-                android:orientation="horizontal">
+                android:layout_marginTop="@dimen/gap_line_double"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/gap_line_double">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:drawableLeft="@drawable/ic_review"
-                    android:drawablePadding="10dp"
-                    android:text="리뷰"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/btn_review_add"
+                    android:id="@+id/tv_restaurant_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_20"
+                    android:textStyle="bold"
+                    tools:text="Restaurant Title" />
+
+
+                <TextView
+                    android:id="@+id/tv_restaurant_stars"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_line"
+                    tools:text="4.3" />
+
+                <TextView
+                    android:id="@+id/tv_restaurant_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_line"
+                    android:drawableLeft="@drawable/ic_location"
+                    android:drawablePadding="@dimen/gap_drawable_padding"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    tools:text="두정 먹자골목" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_line"
+                    android:drawableLeft="@drawable/ic_smile"
+                    android:drawablePadding="@dimen/gap_drawable_padding"
+                    android:gravity="center"
+                    android:text="분위기"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_restaurant_mood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_line"
                     android:background="@drawable/round_light_main_10"
-                    android:drawableRight="@drawable/ic_edit"
-                    android:drawableTint="@color/main_color"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:paddingHorizontal="7dp"
-                    android:paddingVertical="5dp"
-                    android:text="리뷰쓰기"
-                    android:textColor="@color/main_color" />
+                    android:padding="@dimen/gap_line"
+                    tools:text="# 시끄러움" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:drawableLeft="@drawable/ic_review"
+                        android:drawablePadding="10dp"
+                        android:text="리뷰"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/btn_review_add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_light_main_10"
+                        android:drawableRight="@drawable/ic_edit"
+                        android:drawableTint="@color/main_color"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:paddingHorizontal="7dp"
+                        android:paddingVertical="5dp"
+                        android:text="리뷰쓰기"
+                        android:textColor="@color/main_color" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/gap_line_double"
-            android:background="@color/gray"
             android:orientation="vertical">
-            
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_review"
                 android:layout_width="match_parent"

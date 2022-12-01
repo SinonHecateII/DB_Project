@@ -149,7 +149,7 @@ public class RestaurantActivity extends ParentActivity {
                     if (reviewSearchResponseDTO != null) {
 
                         reviewSearchResponseDTO.getResult().forEach(review -> {
-                            reviewModels.add(new ReviewModel(review.getNickname(), Float.parseFloat(review.getScore()), review.getContent()));
+                            reviewModels.add(new ReviewModel(review.getNickname(), Integer.parseInt(review.getScore()), review.getContent()));
                         });
 
                         reviewAdapter.notifyDataSetChanged();
