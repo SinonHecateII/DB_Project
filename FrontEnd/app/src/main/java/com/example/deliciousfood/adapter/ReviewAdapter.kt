@@ -29,7 +29,7 @@ class ReviewAdapter(
 
             tvItemReviewUser.text = model.name
             tvItemReviewContent.text = model.content
-            rbItemReviewRating.rating = model.rating
+            rbItemReviewRating.rating = model.rating!!.toFloat()
         }
     }
 
