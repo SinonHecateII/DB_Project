@@ -22,6 +22,7 @@ import com.example.deliciousfood.api.dto.requestDTO.RegisterDTO;
 import com.example.deliciousfood.api.dto.responseDTO.OnlyResultDTO;
 import com.example.deliciousfood.api.dto.responseDTO.RegisterResponseDTO;
 import com.example.deliciousfood.databinding.ActivityMyPageBinding;
+import com.example.deliciousfood.utils.PopupActivity;
 import com.example.deliciousfood.utils.SharedPreferenceHelper;
 
 import retrofit2.Call;
@@ -89,7 +90,8 @@ public class MyPageActivity extends AppCompatActivity {
         DeleteAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DeleteAccount();
+                startActivity(new Intent(MyPageActivity.this, PopupActivity.class));
+                //
             }
         });
     }
@@ -133,46 +135,6 @@ public class MyPageActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    //계정 삭제 버튼 기능
-    private void DeleteAccount(){
-        String id = SharedPreferenceHelper.INSTANCE.getLoginID(getApplicationContext());
-
-        DeleteAccountDTO deleteAccountDTO = new DeleteAccountDTO(id);
-
-        Call<OnlyResultDTO> deleteAccountCall = deliciousAPI.deleteAccountCall(deleteAccountDTO);
-        deleteAccountCall.enqueue(new Callback<OnlyResultDTO>() {
-            @Override
-            public void onResponse(Call<OnlyResultDTO> call, Response<OnlyResultDTO> response) {
-                if(response.isSuccessful()){
-                    OnlyResultDTO onlyResultDTO = response.body();
-
-                    switch (onlyResultDTO.getResult()){
-                        case "Delete success":
-                            Toast.makeText(getApplicationContext(), "계정을 성공적으로 삭제하였습니다.", Toast.LENGTH_SHORT).show();
-
-                            //재 로그인을 위한 앱 재시작
-                            PackageManager packageManager = getPackageManager();
-                            Intent intent = packageManager.getLaunchIntentForPackage(getPackageName());
-                            ComponentName componentName = intent.getComponent();
-                            Intent mainIntent = Intent.makeRestartActivityTask(componentName);
-                            startActivity(mainIntent);
-                            System.exit(0);
-
-                            break;
-                        case "Delete fail":
-                            Toast.makeText(getApplicationContext(), "계정 삭제에 실패하였습니다..", Toast.LENGTH_SHORT).show();
-                            break;
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<OnlyResultDTO> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "계정 삭제에 알 수 없는 오류가 발생하였습니다.", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override

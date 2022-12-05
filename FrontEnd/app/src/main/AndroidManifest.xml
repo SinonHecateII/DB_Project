@@ -19,6 +19,7 @@
         <activity
             android:name=".pages.session.MyPageActivity"
             android:exported="false" />
+        <activity android:name=".utils.PopupActivity" android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".pages.RestaurantAddActivity"
             android:windowSoftInputMode="adjustResize"
