@@ -53,10 +53,19 @@ public class RestaurantFragment extends Fragment {
             Toast.makeText(requireContext(), "Fragment Arguments 전달 에러", Toast.LENGTH_SHORT).show();
         }
 
-        getRestaurantList();
+        restaurantAdapter = new RestaurantAdapter(requireActivity(), restaurantList);
+        binding.rvRestaurant.setAdapter(restaurantAdapter);
+
         setUpRecyclerClickEvent();
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        getRestaurantList();
     }
 
     public void setUpRecyclerClickEvent() {
@@ -74,8 +83,6 @@ public class RestaurantFragment extends Fragment {
     public void getRestaurantList() {
         restaurantList.clear();
 
-        restaurantAdapter = new RestaurantAdapter(requireActivity(), restaurantList);
-        binding.rvRestaurant.setAdapter(restaurantAdapter);
 
         ArrayList<String> tempMenu = new ArrayList<String>();
 

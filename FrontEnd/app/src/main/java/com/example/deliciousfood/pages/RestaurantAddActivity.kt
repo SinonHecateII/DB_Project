@@ -63,7 +63,6 @@ class RestaurantAddActivity : ParentActivity() {
             }
 
             btnRegisterFinish.setOnClickListener {
-                showProgress(this@RestaurantAddActivity, "잠시만 기다려 주세요")
                 onRestaurantAdd()
             }
         }
@@ -81,6 +80,8 @@ class RestaurantAddActivity : ParentActivity() {
             showShortToast("모든 항목을 입력해주세요")
             return
         }
+
+        showProgress(this@RestaurantAddActivity, "잠시만 기다려 주세요")
 
         // location, name, mood, photoCnt
         val restaurant = RestaurantDTO(location, name, mood, if(imageRealPath == null) 0 else 1)
