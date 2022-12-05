@@ -2,14 +2,16 @@ package com.example.deliciousfood.pages
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.ScrollView
-import android.widget.SpinnerAdapter
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.example.deliciousfood.adapter.RemovableMenuAdapter
+import com.example.deliciousfood.api.DeliciousAPI
+import com.example.deliciousfood.api.PhotoAPI
 import com.example.deliciousfood.api.dto.requestDTO.RestaurantDTO
+import com.example.deliciousfood.api.dto.responseDTO.RestaurantAddResponseDTO
 import com.example.deliciousfood.databinding.ActivityRestaurantAddBinding
 import com.example.deliciousfood.utils.Constants
 import com.example.deliciousfood.utils.ParentActivity
@@ -18,11 +20,21 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
+import retrofit2.*
+import java.io.File
 
 class RestaurantAddActivity : ParentActivity() {
+    private val TAG = "RestaurantAddActivity"
     private val binding by lazy { ActivityRestaurantAddBinding.inflate(layoutInflater) }
     private val menuItems = ArrayList<String>()
     private val menuAdapter by lazy { RemovableMenuAdapter(applicationContext, menuItems) }
+    private val deliciousAPI by lazy { DeliciousAPI.create() }
+    private val photoAPI by lazy { PhotoAPI.create() }
 
 
     // 이미지 절대경로
@@ -50,7 +62,7 @@ class RestaurantAddActivity : ParentActivity() {
                 startActivityForResult(intent, Constants.REQUEST_CODE_GALLERY)
             }
 
-            btnMenuAdd.setOnClickListener {
+            btnRegisterFinish.setOnClickListener {
                 onRestaurantAdd()
             }
         }
@@ -70,8 +82,50 @@ class RestaurantAddActivity : ParentActivity() {
         }
 
         // location, name, mood, photoCnt
-        val restaurant = RestaurantDTO(location, name, mood, menuItems.size)
-        
+        val restaurant = RestaurantDTO(location, name, mood, if(imageRealPath == null) 0 else 1)
+
+        deliciousAPI.restaurantAddCall(restaurant).enqueue(object : Callback<RestaurantAddResponseDTO> {
+            override fun onResponse(
+                call: Call<RestaurantAddResponseDTO>,
+                response: Response<RestaurantAddResponseDTO>
+            ) {
+                if(response.isSuccessful) {
+                    val restaurantId = response.body()!!.restaurantID
+                    val file = File(imageRealPath!!)
+
+                    // 사진 업로드
+                    val multipartImage = MultipartBody.Part.createFormData(
+                        "img",
+                        "${restaurantId}_img0.jpg",
+                        RequestBody.create("image/*".toMediaTypeOrNull(), file)
+                    )
+
+                    photoAPI.uploadImage(multipartImage).enqueue(object : Callback<ResponseBody> {
+                        override fun onResponse(
+                            call: Call<ResponseBody>,
+                            response: Response<ResponseBody>
+                        ) {
+                            if(response.isSuccessful) {
+                                finish()
+                            } else {
+                                Log.d(TAG, "onResponse: ${response.errorBody()}")
+                                showShortToast("사진 업로드 실패 2")
+                            }
+                        }
+
+                        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                            showShortToast("사진 업로드 실패")
+                        }
+                    })
+                } else {
+                    showShortToast("식당 등록에 실패했습니다")
+                }
+            }
+
+            override fun onFailure(call: Call<RestaurantAddResponseDTO>, t: Throwable) {
+                showShortToast("서버와의 통신에 실패했습니다 1")
+            }
+        })
 
     }
 

@@ -177,6 +177,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/btn_full_height"
         android:background="@drawable/btn_main_square"
+        android:id="@+id/btn_register_finish"
         android:foreground="?attr/selectableItemBackground"
         android:text="가게 등록하기" />
 
