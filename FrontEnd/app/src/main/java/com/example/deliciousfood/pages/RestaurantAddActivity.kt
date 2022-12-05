@@ -63,6 +63,7 @@ class RestaurantAddActivity : ParentActivity() {
             }
 
             btnRegisterFinish.setOnClickListener {
+                showProgress(this@RestaurantAddActivity, "잠시만 기다려 주세요")
                 onRestaurantAdd()
             }
         }
@@ -106,24 +107,29 @@ class RestaurantAddActivity : ParentActivity() {
                             response: Response<ResponseBody>
                         ) {
                             if(response.isSuccessful) {
+                                hideProgress()
                                 finish()
                             } else {
                                 Log.d(TAG, "onResponse: ${response.errorBody()}")
                                 showShortToast("사진 업로드 실패 2")
+                                hideProgress()
                             }
                         }
 
                         override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                             showShortToast("사진 업로드 실패")
+                            hideProgress()
                         }
                     })
                 } else {
                     showShortToast("식당 등록에 실패했습니다")
+                    hideProgress()
                 }
             }
 
             override fun onFailure(call: Call<RestaurantAddResponseDTO>, t: Throwable) {
                 showShortToast("서버와의 통신에 실패했습니다 1")
+                hideProgress()
             }
         })
 
