@@ -9,15 +9,17 @@ import android.widget.SpinnerAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.deliciousfood.adapter.RemovableMenuAdapter
+import com.example.deliciousfood.api.dto.requestDTO.RestaurantDTO
 import com.example.deliciousfood.databinding.ActivityRestaurantAddBinding
 import com.example.deliciousfood.utils.Constants
+import com.example.deliciousfood.utils.ParentActivity
 import com.example.deliciousfood.utils.Utils
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 
-class RestaurantAddActivity : AppCompatActivity() {
+class RestaurantAddActivity : ParentActivity() {
     private val binding by lazy { ActivityRestaurantAddBinding.inflate(layoutInflater) }
     private val menuItems = ArrayList<String>()
     private val menuAdapter by lazy { RemovableMenuAdapter(applicationContext, menuItems) }
@@ -47,10 +49,32 @@ class RestaurantAddActivity : AppCompatActivity() {
                 }
                 startActivityForResult(intent, Constants.REQUEST_CODE_GALLERY)
             }
+
+            btnMenuAdd.setOnClickListener {
+                onRestaurantAdd()
+            }
         }
 
         setUpMenuRecyclerView()
     }
+
+
+    private fun onRestaurantAdd(): Unit = with(binding) {
+        val location = spLocation.selectedItem.toString()
+        val name = etRestaurantName.text.toString()
+        val mood = etRestaurantMood.text.toString()
+
+        if (location.isEmpty() || name.isEmpty() || mood.isEmpty()) {
+            showShortToast("모든 항목을 입력해주세요")
+            return
+        }
+
+        // location, name, mood, photoCnt
+        val restaurant = RestaurantDTO(location, name, mood, menuItems.size)
+        
+
+    }
+
 
     private fun setUpMenuRecyclerView() {
         binding.run {
@@ -68,7 +92,7 @@ class RestaurantAddActivity : AppCompatActivity() {
             // Set Menu Add Button Click Event
             btnMenuAdd.setOnClickListener {
                 etMenuAdd.text.toString().let {
-                    if(it.isEmpty()) {
+                    if (it.isEmpty()) {
                         Toast.makeText(applicationContext, "메뉴를 입력해주세요.", Toast.LENGTH_SHORT).show()
                     } else {
                         menuItems.add(it)
@@ -83,12 +107,13 @@ class RestaurantAddActivity : AppCompatActivity() {
             }
 
             // Set RecyclerView Item Remove Click Event
-            menuAdapter.onRemoveClickListener = object : RemovableMenuAdapter.OnRemoveClickListener {
-                override fun onRemoveClick(menu: String, position: Int) {
-                    menuItems.removeAt(position)
-                    menuAdapter.notifyDataSetChanged()
+            menuAdapter.onRemoveClickListener =
+                object : RemovableMenuAdapter.OnRemoveClickListener {
+                    override fun onRemoveClick(menu: String, position: Int) {
+                        menuItems.removeAt(position)
+                        menuAdapter.notifyDataSetChanged()
+                    }
                 }
-            }
         }
     }
 
