@@ -50,6 +50,9 @@ public interface DeliciousAPI {
     @POST("/session/register.php")
     Call<RegisterResponseDTO> registerCall(@Body RegisterDTO registerDTO);
 
+    @POST("/session/edit_account.php")
+    Call<RegisterResponseDTO> EditNicknameCall(@Body RegisterDTO registerDTO);
+
 
     /*
         Restaurant

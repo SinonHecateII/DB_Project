@@ -73,6 +73,8 @@ public class LoginActivity extends ParentActivity {
 
                     if (responseDTO.isSuccess()) {
                         SharedPreferenceHelper.INSTANCE.setLoginID(getApplicationContext(), responseDTO.getId());
+                        SharedPreferenceHelper.INSTANCE.setLoginPW(getApplicationContext(), responseDTO.getPassword());
+                        SharedPreferenceHelper.INSTANCE.setLoginPW(getApplicationContext(), responseDTO.getEmail());
                         SharedPreferenceHelper.INSTANCE.setNickname(getApplicationContext(), responseDTO.getName());
 
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
