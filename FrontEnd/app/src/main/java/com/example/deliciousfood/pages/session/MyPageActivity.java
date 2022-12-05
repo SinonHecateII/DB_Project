@@ -3,6 +3,10 @@ package com.example.deliciousfood.pages.session;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -13,7 +17,9 @@ import android.widget.Toast;
 
 import com.example.deliciousfood.R;
 import com.example.deliciousfood.api.DeliciousAPI;
+import com.example.deliciousfood.api.dto.requestDTO.DeleteAccountDTO;
 import com.example.deliciousfood.api.dto.requestDTO.RegisterDTO;
+import com.example.deliciousfood.api.dto.responseDTO.OnlyResultDTO;
 import com.example.deliciousfood.api.dto.responseDTO.RegisterResponseDTO;
 import com.example.deliciousfood.databinding.ActivityMyPageBinding;
 import com.example.deliciousfood.utils.SharedPreferenceHelper;
@@ -27,6 +33,8 @@ public class MyPageActivity extends AppCompatActivity {
     private DeliciousAPI deliciousAPI;
     EditText UserName;
     Button Edit_Nickname_btn;
+    Button Written_Review;
+    Button DeleteAccountBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +48,9 @@ public class MyPageActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbarMypage);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        /*
+        * 유저 닉네임 확인 및 수정 부분
+        * */
         // 유저 Nickname 가져오기
         String name = SharedPreferenceHelper.INSTANCE.getNickname(getApplicationContext());
         UserName = (EditText) findViewById(R.id.tv_mypage_nickname);
@@ -62,9 +73,29 @@ public class MyPageActivity extends AppCompatActivity {
                 onChange();
             }
         });
+
+        /*
+        * 작성한 리뷰 확인 부분 [작성 중]
+        * */
+        Written_Review = findViewById(R.id.btn_mypage_review);
+        int review_num = 0;  //작성한 리뷰 수
+
+        Written_Review.setText("총" + String.valueOf(review_num) + "건");
+
+        /*
+        * 회원 탈퇴 버튼
+        * */
+        DeleteAccountBtn = (Button) findViewById(R.id.tv_mypage_withdrawal);
+        DeleteAccountBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DeleteAccount();
+            }
+        });
     }
 
-    private void onChange() {  //닉네임 수정 버튼
+    //닉네임 수정 버튼 기능
+    private void onChange() {
         String nickName = UserName.getText().toString();
         String id = SharedPreferenceHelper.INSTANCE.getLoginID(getApplicationContext());
         String pw = SharedPreferenceHelper.INSTANCE.getLoginPW(getApplicationContext());
@@ -102,6 +133,46 @@ public class MyPageActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    //계정 삭제 버튼 기능
+    private void DeleteAccount(){
+        String id = SharedPreferenceHelper.INSTANCE.getLoginID(getApplicationContext());
+
+        DeleteAccountDTO deleteAccountDTO = new DeleteAccountDTO(id);
+
+        Call<OnlyResultDTO> deleteAccountCall = deliciousAPI.deleteAccountCall(deleteAccountDTO);
+        deleteAccountCall.enqueue(new Callback<OnlyResultDTO>() {
+            @Override
+            public void onResponse(Call<OnlyResultDTO> call, Response<OnlyResultDTO> response) {
+                if(response.isSuccessful()){
+                    OnlyResultDTO onlyResultDTO = response.body();
+
+                    switch (onlyResultDTO.getResult()){
+                        case "Delete success":
+                            Toast.makeText(getApplicationContext(), "계정을 성공적으로 삭제하였습니다.", Toast.LENGTH_SHORT).show();
+
+                            //재 로그인을 위한 앱 재시작
+                            PackageManager packageManager = getPackageManager();
+                            Intent intent = packageManager.getLaunchIntentForPackage(getPackageName());
+                            ComponentName componentName = intent.getComponent();
+                            Intent mainIntent = Intent.makeRestartActivityTask(componentName);
+                            startActivity(mainIntent);
+                            System.exit(0);
+
+                            break;
+                        case "Delete fail":
+                            Toast.makeText(getApplicationContext(), "계정 삭제에 실패하였습니다..", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OnlyResultDTO> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "계정 삭제에 알 수 없는 오류가 발생하였습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

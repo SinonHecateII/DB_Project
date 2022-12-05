@@ -1,6 +1,7 @@
 package com.example.deliciousfood.api;
 
 
+import com.example.deliciousfood.api.dto.requestDTO.DeleteAccountDTO;
 import com.example.deliciousfood.api.dto.requestDTO.LoginDTO;
 import com.example.deliciousfood.api.dto.requestDTO.ResIdSearchDTO;
 import com.example.deliciousfood.api.dto.requestDTO.ResSearchDTO;
@@ -56,7 +57,8 @@ public interface DeliciousAPI {
     @POST("/session/edit_account.php")
     Call<RegisterResponseDTO> EditNicknameCall(@Body RegisterDTO registerDTO);
 
-
+    @POST("/session/delete_account.php")
+    Call<OnlyResultDTO> deleteAccountCall(@Body DeleteAccountDTO deleteAccountDTO);
     /*
         Restaurant
      */

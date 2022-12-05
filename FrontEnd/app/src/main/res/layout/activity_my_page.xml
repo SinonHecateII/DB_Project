@@ -63,11 +63,12 @@
             android:layout_marginTop="@dimen/gap_line"
             android:text="@string/obj_mypage_password_change" />
 
-        <TextView
+        <Button
             android:id="@+id/tv_mypage_withdrawal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/gap_line"
+            android:textColor="@color/black"
             android:text="@string/obj_mypage_withdrawal" />
 
         <View
