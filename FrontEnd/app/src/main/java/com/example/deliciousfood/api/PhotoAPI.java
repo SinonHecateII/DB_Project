@@ -14,7 +14,7 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface PhotoAPI {
-    final static String baseUrl = "https://test.loca.lt";
+    final static String baseUrl = "https://dbp6763.loca.lt";
 
     static PhotoAPI create() {
         return getInstance().create(PhotoAPI.class);
