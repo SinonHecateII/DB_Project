@@ -4,11 +4,13 @@ package com.example.deliciousfood.api;
 import com.example.deliciousfood.api.dto.requestDTO.LoginDTO;
 import com.example.deliciousfood.api.dto.requestDTO.ResIdSearchDTO;
 import com.example.deliciousfood.api.dto.requestDTO.ResSearchDTO;
+import com.example.deliciousfood.api.dto.requestDTO.RestaurantDTO;
 import com.example.deliciousfood.api.dto.requestDTO.ReviewDTO;
 import com.example.deliciousfood.api.dto.responseDTO.LoginResponseDTO;
 import com.example.deliciousfood.api.dto.requestDTO.RegisterDTO;
 import com.example.deliciousfood.api.dto.responseDTO.OnlyResultDTO;
 import com.example.deliciousfood.api.dto.responseDTO.RegisterResponseDTO;
+import com.example.deliciousfood.api.dto.responseDTO.RestaurantAddResponseDTO;
 import com.example.deliciousfood.api.dto.responseDTO.RestaurantResponseDTO;
 import com.example.deliciousfood.api.dto.responseDTO.RestaurantResponseModel;
 import com.example.deliciousfood.api.dto.responseDTO.ReviewSearchResponseDTO;
@@ -62,6 +64,10 @@ public interface DeliciousAPI {
 
     @POST("/restaurant/restaurant_search_id.php")
     Call<RestaurantResponseModel> restaurantSearchIdCall(@Body ResIdSearchDTO restaurantID);
+
+    @POST("/restaurant/restaurant_add.php")
+    Call<RestaurantAddResponseDTO> restaurantAddCall(@Body RestaurantDTO restaurantDTO);
+
 
 
     /*
