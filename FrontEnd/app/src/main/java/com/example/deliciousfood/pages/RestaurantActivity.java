@@ -2,6 +2,7 @@ package com.example.deliciousfood.pages;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -15,8 +16,8 @@ import com.example.deliciousfood.adapter.ReviewAdapter;
 import com.example.deliciousfood.api.DeliciousAPI;
 import com.example.deliciousfood.api.dto.requestDTO.ResIdSearchDTO;
 import com.example.deliciousfood.api.dto.requestDTO.ReviewDTO;
+import com.example.deliciousfood.api.dto.requestDTO.ReviewSearchResIdDTO;
 import com.example.deliciousfood.api.dto.responseDTO.OnlyResultDTO;
-import com.example.deliciousfood.api.dto.responseDTO.RestaurantResponseDTO;
 import com.example.deliciousfood.api.dto.responseDTO.RestaurantResponseModel;
 import com.example.deliciousfood.api.dto.responseDTO.ReviewSearchResponseDTO;
 import com.example.deliciousfood.databinding.ActivityRestaurantBinding;
@@ -33,7 +34,7 @@ import retrofit2.Response;
 
 public class RestaurantActivity extends ParentActivity {
     private DeliciousAPI deliciousAPI = DeliciousAPI.create();
-
+    private String TAG = "RestaurantActivity";
     private ActivityRestaurantBinding binding;
     private int restaurantId = -1;
     private ArrayList<ReviewModel> reviewModels = new ArrayList<>();
@@ -55,11 +56,12 @@ public class RestaurantActivity extends ParentActivity {
             showShortToast("restaurantId 전달 에러");
             finish();
         }
+        Log.d(TAG, "onCreate: restaurantId: " + restaurantId);
 
         binding.btnReviewAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openReview();
+                openWriteReviewDialog();
             }
         });
 
@@ -67,7 +69,7 @@ public class RestaurantActivity extends ParentActivity {
         getImage();
     }
 
-    private void openReview() {
+    private void openWriteReviewDialog() {
         Dialog reviewDialog = new Dialog(this);
         reviewDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         reviewDialog.setContentView(R.layout.dialog_review);
@@ -141,12 +143,15 @@ public class RestaurantActivity extends ParentActivity {
     private void setUpReviewRecyclerView() {
         binding.rvReview.setAdapter(reviewAdapter);
 
-        deliciousAPI.reviewSearchCall(restaurantModel.getRestaurantID()).enqueue(new Callback<ReviewSearchResponseDTO>() {
+        Log.d(TAG, "가게 idx = " + restaurantId);
+
+        deliciousAPI.reviewSearchCall(new ReviewSearchResIdDTO(restaurantId)).enqueue(new Callback<ReviewSearchResponseDTO>() {
             @Override
             public void onResponse(Call<ReviewSearchResponseDTO> call, Response<ReviewSearchResponseDTO> response) {
                 if (response.isSuccessful()) {
                     ReviewSearchResponseDTO reviewSearchResponseDTO = response.body();
                     if (reviewSearchResponseDTO != null) {
+                        Log.d(TAG, "onResponse: size = "+reviewSearchResponseDTO.getResult().size());
 
                         reviewSearchResponseDTO.getResult().forEach(review -> {
                             reviewModels.add(new ReviewModel(review.getNickname(), Integer.parseInt(review.getScore()), review.getContent()));
@@ -154,6 +159,8 @@ public class RestaurantActivity extends ParentActivity {
 
                         reviewAdapter.notifyDataSetChanged();
                     }
+                } else {
+                    Log.d(TAG, "onResponse: reviewSearchCall 실패");;
                 }
             }
 
