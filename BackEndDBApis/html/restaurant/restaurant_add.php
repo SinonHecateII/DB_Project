@@ -20,7 +20,7 @@ if ($con->query($insert_sql)) {
     $idx_search = "SELECT restaurantID FROM restaurant WHERE location = '$location' AND name = '$name'";
 
     $idx_result = mysqli_query($con, $idx_search);
-    $response["restaurantID"] = mysqli_fetch_array($idx_result)[0];
+    $response["restaurantID"] = (int)mysqli_fetch_array($idx_result)[0];
 
 } else {
     $response["result"] = "restaurant add fail";
