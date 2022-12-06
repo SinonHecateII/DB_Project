@@ -28,13 +28,13 @@ import okhttp3.ResponseBody
 import retrofit2.*
 import java.io.File
 
-class RestaurantAddActivity : ParentActivity() {
-    private val TAG = "RestaurantAddActivity"
-    private val binding by lazy { ActivityRestaurantAddBinding.inflate(layoutInflater) }
-    private val menuItems = ArrayList<String>()
-    private val menuAdapter by lazy { RemovableMenuAdapter(applicationContext, menuItems) }
-    private val deliciousAPI by lazy { DeliciousAPI.create() }
-    private val photoAPI by lazy { PhotoAPI.create() }
+open class RestaurantAddActivity : ParentActivity() {
+    protected val TAG = "RestaurantAddActivity"
+    protected val binding by lazy { ActivityRestaurantAddBinding.inflate(layoutInflater) }
+    protected val menuItems = ArrayList<String>()
+    protected val menuAdapter by lazy { RemovableMenuAdapter(applicationContext, menuItems) }
+    protected val deliciousAPI by lazy { DeliciousAPI.create() }
+    protected val photoAPI by lazy { PhotoAPI.create() }
 
 
     // 이미지 절대경로
@@ -44,6 +44,15 @@ class RestaurantAddActivity : ParentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        binding.btnRegisterFinish.setOnClickListener {
+            onRestaurantAdd()
+        }
+
+        commonSetting()
+    }
+
+    // 수정, 삭제 공통세팅
+    protected fun commonSetting() {
         setSupportActionBar(binding.toolbarRestaurantAdd)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
@@ -62,9 +71,7 @@ class RestaurantAddActivity : ParentActivity() {
                 startActivityForResult(intent, Constants.REQUEST_CODE_GALLERY)
             }
 
-            btnRegisterFinish.setOnClickListener {
-                onRestaurantAdd()
-            }
+
         }
 
         setUpMenuRecyclerView()

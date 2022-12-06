@@ -17,13 +17,21 @@
         android:theme="@style/Theme.DeliciousFood"
         tools:targetApi="31">
         <activity
+            android:name=".pages.MyReviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pages.RestaurantEditActivity"
+            android:exported="false" />
+        <activity
             android:name=".pages.session.MyPageActivity"
             android:exported="false" />
-        <activity android:name=".utils.PopupActivity" android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".utils.PopupActivity"
+            android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".pages.RestaurantAddActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".pages.RestaurantActivity"
             android:exported="false" />

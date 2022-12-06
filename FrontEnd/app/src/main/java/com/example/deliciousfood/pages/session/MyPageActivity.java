@@ -22,6 +22,7 @@ import com.example.deliciousfood.api.dto.requestDTO.RegisterDTO;
 import com.example.deliciousfood.api.dto.responseDTO.OnlyResultDTO;
 import com.example.deliciousfood.api.dto.responseDTO.RegisterResponseDTO;
 import com.example.deliciousfood.databinding.ActivityMyPageBinding;
+import com.example.deliciousfood.pages.MyReviewActivity;
 import com.example.deliciousfood.utils.PopupActivity;
 import com.example.deliciousfood.utils.SharedPreferenceHelper;
 
@@ -82,6 +83,13 @@ public class MyPageActivity extends AppCompatActivity {
         int review_num = 0;  //작성한 리뷰 수
 
         Written_Review.setText("총" + String.valueOf(review_num) + "건");
+
+        Written_Review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), MyReviewActivity.class));
+            }
+        });
 
         /*
         * 회원 탈퇴 버튼

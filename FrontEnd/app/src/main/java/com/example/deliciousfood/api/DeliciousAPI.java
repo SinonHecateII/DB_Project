@@ -8,6 +8,7 @@ import com.example.deliciousfood.api.dto.requestDTO.ResSearchDTO;
 import com.example.deliciousfood.api.dto.requestDTO.RestaurantDTO;
 import com.example.deliciousfood.api.dto.requestDTO.ReviewDTO;
 import com.example.deliciousfood.api.dto.requestDTO.ReviewSearchResIdDTO;
+import com.example.deliciousfood.api.dto.requestDTO.ReviewSearchUserIdDTO;
 import com.example.deliciousfood.api.dto.responseDTO.LoginResponseDTO;
 import com.example.deliciousfood.api.dto.requestDTO.RegisterDTO;
 import com.example.deliciousfood.api.dto.responseDTO.OnlyResultDTO;
@@ -16,6 +17,7 @@ import com.example.deliciousfood.api.dto.responseDTO.RestaurantAddResponseDTO;
 import com.example.deliciousfood.api.dto.responseDTO.RestaurantResponseDTO;
 import com.example.deliciousfood.api.dto.responseDTO.RestaurantResponseModel;
 import com.example.deliciousfood.api.dto.responseDTO.ReviewSearchResponseDTO;
+import com.example.deliciousfood.api.dto.responseDTO.ReviewSearchUserIdResponseDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -81,4 +83,7 @@ public interface DeliciousAPI {
 
     @POST("/review/review_add.php")
     Call<OnlyResultDTO> reviewAddCall(@Body ReviewDTO reviewDTO);
+
+    @POST("/review/review_search_user_id.php")
+    Call<ReviewSearchUserIdResponseDTO> reviewSearchUserIdCall(@Body ReviewSearchUserIdDTO reviewSearchUserIdDTO);
 }
