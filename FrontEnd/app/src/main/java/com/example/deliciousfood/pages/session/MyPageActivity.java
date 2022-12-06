@@ -16,15 +16,22 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.deliciousfood.R;
+import com.example.deliciousfood.adapter.MyReviewAdapter;
 import com.example.deliciousfood.api.DeliciousAPI;
 import com.example.deliciousfood.api.dto.requestDTO.DeleteAccountDTO;
 import com.example.deliciousfood.api.dto.requestDTO.RegisterDTO;
+import com.example.deliciousfood.api.dto.requestDTO.ReviewSearchResIdDTO;
+import com.example.deliciousfood.api.dto.requestDTO.ReviewSearchUserIdDTO;
 import com.example.deliciousfood.api.dto.responseDTO.OnlyResultDTO;
 import com.example.deliciousfood.api.dto.responseDTO.RegisterResponseDTO;
+import com.example.deliciousfood.api.dto.responseDTO.ReviewSearchUserIdResponseDTO;
+import com.example.deliciousfood.api.dto.responseDTO.ReviewSearchUserIdResult;
 import com.example.deliciousfood.databinding.ActivityMyPageBinding;
 import com.example.deliciousfood.pages.MyReviewActivity;
 import com.example.deliciousfood.utils.PopupActivity;
 import com.example.deliciousfood.utils.SharedPreferenceHelper;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,6 +40,8 @@ import retrofit2.Response;
 public class MyPageActivity extends AppCompatActivity {
     private ActivityMyPageBinding binding;
     private DeliciousAPI deliciousAPI;
+    private String name;
+    private String userID;
     EditText UserName;
     Button Edit_Nickname_btn;
     Button Written_Review;
@@ -54,7 +63,7 @@ public class MyPageActivity extends AppCompatActivity {
         * 유저 닉네임 확인 및 수정 부분
         * */
         // 유저 Nickname 가져오기
-        String name = SharedPreferenceHelper.INSTANCE.getNickname(getApplicationContext());
+        name = SharedPreferenceHelper.INSTANCE.getNickname(getApplicationContext());
         UserName = (EditText) findViewById(R.id.tv_mypage_nickname);
         UserName.setText(name);
 
@@ -77,13 +86,28 @@ public class MyPageActivity extends AppCompatActivity {
         });
 
         /*
-        * 작성한 리뷰 확인 부분 [작성 중]
+        * 작성한 리뷰 개수 확인 부분
         * */
         Written_Review = findViewById(R.id.btn_mypage_review);
-        int review_num = 0;  //작성한 리뷰 수
+        userID = SharedPreferenceHelper.INSTANCE.getLoginID(getApplicationContext());
 
-        Written_Review.setText("총" + String.valueOf(review_num) + "건");
+        deliciousAPI.reviewSearchUserIdCall(new ReviewSearchUserIdDTO(userID)).enqueue(new Callback<ReviewSearchUserIdResponseDTO>() {
+            @Override
+            public void onResponse(Call<ReviewSearchUserIdResponseDTO> call, Response<ReviewSearchUserIdResponseDTO> response) {
+                if (response.isSuccessful()) {
+                    ReviewSearchUserIdResponseDTO reviewSearchResponseDTO = response.body();
+                    Written_Review.setText("총 "+ String.valueOf(reviewSearchResponseDTO.getResult().size()) + "건");
+                }
+            }
 
+            @Override
+            public void onFailure(Call<ReviewSearchUserIdResponseDTO> call, Throwable t) {
+
+            }
+        });
+
+
+        //작성한 리뷰 목록 보러가는 버튼
         Written_Review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
