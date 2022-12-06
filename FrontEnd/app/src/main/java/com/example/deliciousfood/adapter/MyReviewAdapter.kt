@@ -18,6 +18,11 @@ class MyReviewAdapter(
 ) :
     RecyclerView.Adapter<MyReviewAdapter.Holder>() {
 
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    var onItemClickListener: OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -43,5 +48,11 @@ class MyReviewAdapter(
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val binding = ItemMyReviewBinding.bind(itemView)
+
+        init {
+            itemView.setOnClickListener {
+                onItemClickListener?.onItemClick(bindingAdapterPosition)
+            }
+        }
     }
 }

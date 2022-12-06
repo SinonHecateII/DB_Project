@@ -2,6 +2,7 @@ package com.example.deliciousfood.pages;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.deliciousfood.adapter.MyReviewAdapter;
@@ -12,6 +13,7 @@ import com.example.deliciousfood.api.dto.responseDTO.ReviewSearchResponseDTO;
 import com.example.deliciousfood.api.dto.responseDTO.ReviewSearchUserIdResponseDTO;
 import com.example.deliciousfood.api.dto.responseDTO.ReviewSearchUserIdResult;
 import com.example.deliciousfood.databinding.ActivityMyReviewBinding;
+import com.example.deliciousfood.utils.Constants;
 import com.example.deliciousfood.utils.SharedPreferenceHelper;
 
 import java.util.ArrayList;
@@ -65,5 +67,16 @@ public class MyReviewActivity extends AppCompatActivity {
             }
         });
 
+
+
+        myReviewAdapter.setOnItemClickListener(new MyReviewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(getApplicationContext(), RestaurantActivity.class);
+                intent.putExtra(Constants.INTENT_EXTRA_RESTAURANT_ID, Integer.parseInt(reviewResponseModels.get(position).getRestaurantID()));
+                startActivity(intent);
+            }
+        });
     }
+
 }
