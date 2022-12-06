@@ -7,6 +7,8 @@ import com.example.deliciousfood.api.dto.requestDTO.ResIdSearchDTO;
 import com.example.deliciousfood.api.dto.requestDTO.ResSearchDTO;
 import com.example.deliciousfood.api.dto.requestDTO.RestaurantDTO;
 import com.example.deliciousfood.api.dto.requestDTO.ReviewDTO;
+import com.example.deliciousfood.api.dto.requestDTO.ReviewEditDTO;
+import com.example.deliciousfood.api.dto.requestDTO.ReviewIdDTO;
 import com.example.deliciousfood.api.dto.requestDTO.ReviewSearchResIdDTO;
 import com.example.deliciousfood.api.dto.requestDTO.ReviewSearchUserIdDTO;
 import com.example.deliciousfood.api.dto.responseDTO.LoginResponseDTO;
@@ -86,4 +88,10 @@ public interface DeliciousAPI {
 
     @POST("/review/review_search_user_id.php")
     Call<ReviewSearchUserIdResponseDTO> reviewSearchUserIdCall(@Body ReviewSearchUserIdDTO reviewSearchUserIdDTO);
+
+    @POST("/review/review_delete.php")
+    Call<OnlyResultDTO> reviewDeleteCall(@Body ReviewIdDTO reviewIdDTO);
+
+    @POST("/review/review_edit.php")
+    Call<OnlyResultDTO> reviewEditCall(@Body ReviewEditDTO reviewEditDTO);
 }

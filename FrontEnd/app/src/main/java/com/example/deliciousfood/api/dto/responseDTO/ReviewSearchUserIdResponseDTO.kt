@@ -5,11 +5,11 @@ data class ReviewSearchUserIdResponseDTO(
 )
 
 data class ReviewSearchUserIdResult(
-    val content: String,
+    var content: String,
     val createdAt: String,
     val restaurantID: String,
     val restaurantName: String,
     val reviewID: String,
-    val score: String,
+    var score: String,
     val writer: String
 )

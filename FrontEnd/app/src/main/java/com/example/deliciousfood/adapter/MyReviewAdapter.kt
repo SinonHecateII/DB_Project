@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.deliciousfood.R
 import com.example.deliciousfood.api.dto.responseDTO.ReviewResponseModel
@@ -22,7 +23,12 @@ class MyReviewAdapter(
         fun onItemClick(position: Int)
     }
 
+    interface OnMoreClickListener {
+        fun onMoreClick(position: Int, imageView: ImageView)
+    }
+
     var onItemClickListener: OnItemClickListener? = null
+    var onMoreClickListener: OnMoreClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -52,6 +58,9 @@ class MyReviewAdapter(
         init {
             itemView.setOnClickListener {
                 onItemClickListener?.onItemClick(bindingAdapterPosition)
+            }
+            binding.ivItemMyReviewMore.setOnClickListener {
+                onMoreClickListener?.onMoreClick(bindingAdapterPosition, binding.ivItemMyReviewMore)
             }
         }
     }
