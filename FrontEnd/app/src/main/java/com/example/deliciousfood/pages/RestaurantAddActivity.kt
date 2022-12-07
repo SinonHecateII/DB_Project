@@ -38,7 +38,7 @@ open class RestaurantAddActivity : ParentActivity() {
 
 
     // 이미지 절대경로
-    private var imageRealPath: String? = null
+    protected var imageRealPath: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,26 +109,29 @@ open class RestaurantAddActivity : ParentActivity() {
                         RequestBody.create("image/*".toMediaTypeOrNull(), file)
                     )
 
-                    photoAPI.uploadImage(multipartImage).enqueue(object : Callback<ResponseBody> {
-                        override fun onResponse(
-                            call: Call<ResponseBody>,
-                            response: Response<ResponseBody>
-                        ) {
-                            if(response.isSuccessful) {
-                                hideProgress()
-                                finish()
-                            } else {
-                                Log.d(TAG, "onResponse: ${response.errorBody()}")
-                                showShortToast("사진 업로드 실패 2")
-                                hideProgress()
-                            }
-                        }
+                    if(imageRealPath != null) {
+                        photoAPI.uploadImage(multipartImage)
+                            .enqueue(object : Callback<ResponseBody> {
+                                override fun onResponse(
+                                    call: Call<ResponseBody>,
+                                    response: Response<ResponseBody>
+                                ) {
+                                    if (response.isSuccessful) {
+                                        hideProgress()
+                                        finish()
+                                    } else {
+                                        Log.d(TAG, "onResponse: ${response.errorBody()}")
+                                        showShortToast("사진 업로드 실패 2")
+                                        hideProgress()
+                                    }
+                                }
 
-                        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                            showShortToast("사진 업로드 실패")
-                            hideProgress()
-                        }
-                    })
+                                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                                    showShortToast("사진 업로드 실패")
+                                    hideProgress()
+                                }
+                            })
+                    }
                 } else {
                     showShortToast("식당 등록에 실패했습니다")
                     hideProgress()

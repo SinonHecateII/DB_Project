@@ -3,6 +3,7 @@ package com.example.deliciousfood.api;
 
 import com.example.deliciousfood.api.dto.requestDTO.DeleteAccountDTO;
 import com.example.deliciousfood.api.dto.requestDTO.LoginDTO;
+import com.example.deliciousfood.api.dto.requestDTO.ResEditDTO;
 import com.example.deliciousfood.api.dto.requestDTO.ResIdSearchDTO;
 import com.example.deliciousfood.api.dto.requestDTO.ResSearchDTO;
 import com.example.deliciousfood.api.dto.requestDTO.RestaurantDTO;
@@ -74,6 +75,12 @@ public interface DeliciousAPI {
 
     @POST("/restaurant/restaurant_add.php")
     Call<RestaurantAddResponseDTO> restaurantAddCall(@Body RestaurantDTO restaurantDTO);
+
+    @POST("/restaurant/restaurant_delete.php")
+    Call<OnlyResultDTO> restaurantDeleteCall(@Body ResIdSearchDTO restaurantID);
+
+    @POST("restaurant/restaurant_edit.php")
+    Call<OnlyResultDTO> restaurantEditCall(@Body ResEditDTO resEditDTO);
 
 
 

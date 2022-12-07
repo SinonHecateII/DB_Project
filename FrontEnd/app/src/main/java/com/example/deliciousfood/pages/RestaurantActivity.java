@@ -1,6 +1,7 @@
 package com.example.deliciousfood.pages;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -62,6 +63,34 @@ public class RestaurantActivity extends ParentActivity {
             @Override
             public void onClick(View view) {
                 openWriteReviewDialog();
+            }
+        });
+
+        binding.ivRestaurantEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), RestaurantEditActivity.class);
+                intent.putExtra(Constants.INTENT_EXTRA_RESTAURANT_ID, restaurantId);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        binding.ivRestaurantDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deliciousAPI.restaurantDeleteCall(new ResIdSearchDTO(restaurantId)).enqueue(new Callback<OnlyResultDTO>() {
+                    @Override
+                    public void onResponse(Call<OnlyResultDTO> call, Response<OnlyResultDTO> response) {
+                        showShortToast("가게 삭제 성공");
+                        finish();
+                    }
+
+                    @Override
+                    public void onFailure(Call<OnlyResultDTO> call, Throwable t) {
+
+                    }
+                });
             }
         });
 
@@ -151,7 +180,7 @@ public class RestaurantActivity extends ParentActivity {
                 if (response.isSuccessful()) {
                     ReviewSearchResponseDTO reviewSearchResponseDTO = response.body();
                     if (reviewSearchResponseDTO != null) {
-                        Log.d(TAG, "onResponse: size = "+reviewSearchResponseDTO.getResult().size());
+                        Log.d(TAG, "onResponse: size = " + reviewSearchResponseDTO.getResult().size());
 
                         reviewSearchResponseDTO.getResult().forEach(review -> {
                             reviewModels.add(new ReviewModel(review.getNickname(), Integer.parseInt(review.getScore()), review.getContent()));
@@ -160,7 +189,8 @@ public class RestaurantActivity extends ParentActivity {
                         reviewAdapter.notifyDataSetChanged();
                     }
                 } else {
-                    Log.d(TAG, "onResponse: reviewSearchCall 실패");;
+                    Log.d(TAG, "onResponse: reviewSearchCall 실패");
+                    ;
                 }
             }
 
