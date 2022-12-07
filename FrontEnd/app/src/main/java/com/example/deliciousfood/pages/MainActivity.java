@@ -67,13 +67,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        binding.toolbarRegister.findViewById(R.id.menu_search).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "검색 버튼 클릭",Toast.LENGTH_SHORT).show();
-            }
-        });
-
         binding.btnRestaurantAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

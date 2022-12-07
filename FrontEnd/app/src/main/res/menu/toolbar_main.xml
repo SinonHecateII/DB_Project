@@ -2,11 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_search"
-        android:icon="@drawable/ic_search"
-        app:showAsAction="always"
-        android:title="검색" />
-    <item
         android:id="@+id/menu_mypage"
         app:showAsAction="always"
         android:icon="@drawable/ic_my_page"
