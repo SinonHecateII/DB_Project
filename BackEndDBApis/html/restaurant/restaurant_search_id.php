@@ -21,6 +21,7 @@ while ($row = mysqli_fetch_array($select_sql_result)) {
     $response['name'] = $row[2];
     $response['mood'] = $row[3];
     $response['photoCnt'] = $row[4];
+    $response['writerID'] = $row[5];
 
 }
 // 배열형식의 결과를 json으로 변환

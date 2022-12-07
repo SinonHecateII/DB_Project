@@ -9,8 +9,9 @@ $location = $data["location"];
 $name = $data["name"];
 $mood = $data["mood"];
 $photoCnt = $data["photoCnt"];
+$Writer = $data["Writer"];
 
-$insert_sql = "INSERT INTO  restaurant(location, name, mood, photoCnt) values ('$location', '$name', '$mood', '$photoCnt') ";
+$insert_sql = "INSERT INTO  restaurant(location, name, mood, photoCnt, Writer) values ('$location', '$name', '$mood', '$photoCnt', '$Writer') ";
 
 $response = array();
 header('Content-Type: application/json');
