@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.deliciousfood.R;
@@ -26,6 +27,7 @@ public class LoginActivity extends ParentActivity {
     private EditText et_login_pw;
     private Button btn_register;
     private Button btn_login;
+    private LinearLayout ll_login_container;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +38,11 @@ public class LoginActivity extends ParentActivity {
         btn_register = findViewById(R.id.btn_register);
         et_login_id = findViewById(R.id.et_login_id);
         et_login_pw = findViewById(R.id.et_login_pw);
+        ll_login_container = findViewById(R.id.ll_login_container);
 
         deliciousAPI = DeliciousAPI.create();
+
+        ll_login_container.setClipToOutline(true);
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
