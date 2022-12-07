@@ -15,6 +15,7 @@ import com.example.deliciousfood.api.dto.responseDTO.RestaurantAddResponseDTO
 import com.example.deliciousfood.databinding.ActivityRestaurantAddBinding
 import com.example.deliciousfood.utils.Constants
 import com.example.deliciousfood.utils.ParentActivity
+import com.example.deliciousfood.utils.SharedPreferenceHelper
 import com.example.deliciousfood.utils.Utils
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
@@ -91,7 +92,7 @@ open class RestaurantAddActivity : ParentActivity() {
         showProgress(this@RestaurantAddActivity, "잠시만 기다려 주세요")
 
         // location, name, mood, photoCnt
-        val restaurant = RestaurantDTO(location, name, mood, if(imageRealPath == null) 0 else 1)
+        val restaurant = RestaurantDTO(location, name, mood, if(imageRealPath == null) 0 else 1, SharedPreferenceHelper.getLoginID(this@RestaurantAddActivity))
 
         deliciousAPI.restaurantAddCall(restaurant).enqueue(object : Callback<RestaurantAddResponseDTO> {
             override fun onResponse(

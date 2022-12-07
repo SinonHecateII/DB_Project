@@ -131,13 +131,15 @@
                 android:layout_marginTop="@dimen/margin_20"
                 android:drawableLeft="@drawable/ic_dish"
                 android:drawablePadding="10dp"
-                android:text="대표메뉴" />
+                android:text="대표메뉴"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/gap_line"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <EditText
                     android:id="@+id/et_menu_add"
@@ -168,16 +170,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/gap_line"
                 android:paddingBottom="50dp"
+                android:visibility="gone"
                 tools:itemCount="3"
                 tools:listitem="@layout/item_menu_removable" />
         </LinearLayout>
     </ScrollView>
 
     <Button
+        android:id="@+id/btn_register_finish"
         android:layout_width="match_parent"
         android:layout_height="@dimen/btn_full_height"
         android:background="@drawable/btn_main_square"
-        android:id="@+id/btn_register_finish"
         android:foreground="?attr/selectableItemBackground"
         android:text="가게 등록하기" />
 

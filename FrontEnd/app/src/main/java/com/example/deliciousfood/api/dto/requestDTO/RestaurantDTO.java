@@ -5,12 +5,14 @@ public class RestaurantDTO {
     String name;
     String mood;
     int photoCnt;
+    String Writer;
 
-    public RestaurantDTO(String location, String name, String mood, int photoCnt) {
+    public RestaurantDTO(String location, String name, String mood, int photoCnt, String Writer) {
         this.location = location;
         this.name = name;
         this.mood = mood;
         this.photoCnt = photoCnt;
+        this.Writer = Writer;
     }
 
     public RestaurantDTO() {
@@ -46,5 +48,13 @@ public class RestaurantDTO {
 
     public void setPhotoCnt(int photoCnt) {
         this.photoCnt = photoCnt;
+    }
+
+    public String getWriter() {
+        return Writer;
+    }
+
+    public void setWriter(String Writer) {
+        this.Writer = Writer;
     }
 }

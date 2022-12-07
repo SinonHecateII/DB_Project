@@ -12,4 +12,5 @@
     <string name="obj_mypage_restaurant">내가 등록한 가게</string>
     <string name="obj_mypage_version">현재 버전</string>
     <string name="obj_my_review_title">내가 작성한 리뷰</string>
+    <string name="obj_my_restaurant_title">내가 등록한 가게</string>
 </resources>

@@ -9,5 +9,6 @@ data class RestaurantResponseModel(
     val mood: String,
     val name: String,
     val photoCnt: String,
-    val restaurantID: String
+    val restaurantID: String,
+    val writerID: String
 )

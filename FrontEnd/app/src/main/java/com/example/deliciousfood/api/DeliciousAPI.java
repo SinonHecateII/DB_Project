@@ -12,6 +12,7 @@ import com.example.deliciousfood.api.dto.requestDTO.ReviewEditDTO;
 import com.example.deliciousfood.api.dto.requestDTO.ReviewIdDTO;
 import com.example.deliciousfood.api.dto.requestDTO.ReviewSearchResIdDTO;
 import com.example.deliciousfood.api.dto.requestDTO.ReviewSearchUserIdDTO;
+import com.example.deliciousfood.api.dto.requestDTO.WriterIdDTO;
 import com.example.deliciousfood.api.dto.responseDTO.LoginResponseDTO;
 import com.example.deliciousfood.api.dto.requestDTO.RegisterDTO;
 import com.example.deliciousfood.api.dto.responseDTO.OnlyResultDTO;
@@ -64,6 +65,8 @@ public interface DeliciousAPI {
 
     @POST("/session/delete_account.php")
     Call<OnlyResultDTO> deleteAccountCall(@Body DeleteAccountDTO deleteAccountDTO);
+
+
     /*
         Restaurant
      */
@@ -82,6 +85,8 @@ public interface DeliciousAPI {
     @POST("restaurant/restaurant_edit.php")
     Call<OnlyResultDTO> restaurantEditCall(@Body ResEditDTO resEditDTO);
 
+    @POST("/restaurant/restaurant_search_writer_id.php")
+    Call<RestaurantResponseDTO> restaurantSearchWriterIdCall(@Body WriterIdDTO writerIdDTO);
 
 
     /*

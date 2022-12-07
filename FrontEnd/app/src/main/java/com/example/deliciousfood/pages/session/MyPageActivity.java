@@ -22,8 +22,10 @@ import com.example.deliciousfood.api.dto.requestDTO.DeleteAccountDTO;
 import com.example.deliciousfood.api.dto.requestDTO.RegisterDTO;
 import com.example.deliciousfood.api.dto.requestDTO.ReviewSearchResIdDTO;
 import com.example.deliciousfood.api.dto.requestDTO.ReviewSearchUserIdDTO;
+import com.example.deliciousfood.api.dto.requestDTO.WriterIdDTO;
 import com.example.deliciousfood.api.dto.responseDTO.OnlyResultDTO;
 import com.example.deliciousfood.api.dto.responseDTO.RegisterResponseDTO;
+import com.example.deliciousfood.api.dto.responseDTO.RestaurantResponseDTO;
 import com.example.deliciousfood.api.dto.responseDTO.ReviewSearchUserIdResponseDTO;
 import com.example.deliciousfood.api.dto.responseDTO.ReviewSearchUserIdResult;
 import com.example.deliciousfood.databinding.ActivityMyPageBinding;
@@ -114,6 +116,29 @@ public class MyPageActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), MyReviewActivity.class));
             }
         });
+
+        //작성한 가게 개수 설정
+        deliciousAPI.restaurantSearchWriterIdCall(new WriterIdDTO(userID)).enqueue(new Callback<RestaurantResponseDTO>() {
+            @Override
+            public void onResponse(Call<RestaurantResponseDTO> call, Response<RestaurantResponseDTO> response) {
+                if (response.isSuccessful()) {
+                    RestaurantResponseDTO restaurantResponseDTO = response.body();
+                    binding.btnMypageRestaurant.setText("총 "+ String.valueOf(restaurantResponseDTO.getResult().size()) + "건");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RestaurantResponseDTO> call, Throwable t) {
+
+            }
+        });
+        binding.btnMypageRestaurant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), MyRestaurantActivity.class));
+            }
+        });
+
 
         /*
         * 회원 탈퇴 버튼

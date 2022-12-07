@@ -42,6 +42,7 @@ public class RestaurantActivity extends ParentActivity {
     private ReviewAdapter reviewAdapter;
     private ResIdSearchDTO resIdSearchDTO;
     private RestaurantResponseModel restaurantModel;
+    private String currentUserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,8 @@ public class RestaurantActivity extends ParentActivity {
         binding = ActivityRestaurantBinding.inflate(getLayoutInflater());
 
         setContentView(binding.getRoot());
+
+        currentUserID = SharedPreferenceHelper.INSTANCE.getLoginID(getApplicationContext());
 
         reviewAdapter = new ReviewAdapter(getApplicationContext(), reviewModels);
 
@@ -58,6 +61,7 @@ public class RestaurantActivity extends ParentActivity {
             finish();
         }
         Log.d(TAG, "onCreate: restaurantId: " + restaurantId);
+
 
         binding.btnReviewAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -229,6 +233,14 @@ public class RestaurantActivity extends ParentActivity {
                         binding.tvRestaurantLocation.setText(restaurantModel.getLocation());
 
                         setUpReviewRecyclerView();
+
+                        if(currentUserID.equals(restaurantModel.getWriterID())) {
+                            binding.ivRestaurantDelete.setVisibility(View.VISIBLE);
+                            binding.ivRestaurantEdit.setVisibility(View.VISIBLE);
+                        } else {
+                            binding.ivRestaurantDelete.setVisibility(View.INVISIBLE);
+                            binding.ivRestaurantEdit.setVisibility(View.INVISIBLE);
+                        }
                     } else {
                         showShortToast("식당 정보를 불러오는데 실패했습니다.");
                     }
