@@ -11,15 +11,15 @@ $restaurantID = $data["restaurantID"];
 $writer = $data["writer"];
 $createdAt = $data["createdAt"];
 
-$insert_sql = "INSERT INTO  review(content, score, restaurantID, writer, createdAt) values ('$content', '$score', '$restaurantID', '$writer', '$createdAt') ";
+$insert_sql = "INSERT INTO  review(content, score, restaurantID, writer) values ('$content', '$score', '$restaurantID', '$writer') ";
 
 $response = array();
 header('Content-Type: application/json');
 
 if ($con->query($insert_sql)) {
-    $response["result"] = "restaurant add success";
+    $response["result"] = "review add success";
 } else {
-    $response["result"] = "restaurant add fail";
+    $response["result"] = "review add fail";
 }
 
 echo json_encode($response);
