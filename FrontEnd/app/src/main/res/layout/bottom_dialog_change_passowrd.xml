@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/gap_line_double"
+        android:text="비밀번호 변경"
+        android:textSize="@dimen/text_size_15"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/et_password_change"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_full_height"
+        android:layout_marginHorizontal="@dimen/gap_line_double"
+        android:background="@drawable/et_gray_box"
+        android:hint="변경할 비밀번호를 입력해주세요"
+        android:inputType="textPassword"
+        android:paddingHorizontal="@dimen/gap_line_double" />
+
+    <Button
+        android:id="@+id/btn_password_change_ok"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_full_height"
+        android:layout_marginTop="@dimen/gap_line_double"
+        android:background="@color/main_color"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="비밀번호 변경 확인"
+        android:textColor="@color/white" />
+
+
+</LinearLayout>

@@ -19,6 +19,7 @@ import com.example.deliciousfood.R;
 import com.example.deliciousfood.adapter.MyReviewAdapter;
 import com.example.deliciousfood.api.DeliciousAPI;
 import com.example.deliciousfood.api.dto.requestDTO.DeleteAccountDTO;
+import com.example.deliciousfood.api.dto.requestDTO.LoginDTO;
 import com.example.deliciousfood.api.dto.requestDTO.RegisterDTO;
 import com.example.deliciousfood.api.dto.requestDTO.ReviewSearchResIdDTO;
 import com.example.deliciousfood.api.dto.requestDTO.ReviewSearchUserIdDTO;
@@ -32,6 +33,7 @@ import com.example.deliciousfood.databinding.ActivityMyPageBinding;
 import com.example.deliciousfood.pages.MyReviewActivity;
 import com.example.deliciousfood.utils.PopupActivity;
 import com.example.deliciousfood.utils.SharedPreferenceHelper;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 
@@ -157,6 +159,50 @@ public class MyPageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(new Intent(MyPageActivity.this, PopupActivity.class));
                 //
+            }
+        });
+
+
+        /*
+            비밀번호 변경
+         */
+        binding.tvMypagePasswordChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BottomSheetDialog passwordChangeDialog = new BottomSheetDialog(MyPageActivity.this);
+                passwordChangeDialog.setContentView(R.layout.bottom_dialog_change_passowrd);
+                passwordChangeDialog.show();
+
+                EditText etPassWordChange = passwordChangeDialog.findViewById(R.id.et_password_change);
+
+                passwordChangeDialog.findViewById(R.id.btn_password_change_ok).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        String password = etPassWordChange.getText().toString();
+                        if(password.length() == 0) {
+                            Toast.makeText(MyPageActivity.this, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        LoginDTO loginDTO = new LoginDTO(userID, password);
+                        deliciousAPI.passwordChangeCall(loginDTO).enqueue(new Callback<OnlyResultDTO>() {
+                            @Override
+                            public void onResponse(Call<OnlyResultDTO> call, Response<OnlyResultDTO> response) {
+                                if(response.isSuccessful()) {
+                                    Toast.makeText(MyPageActivity.this, response.body().getResult(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<OnlyResultDTO> call, Throwable t) {
+                                Toast.makeText(MyPageActivity.this, "비밀번호 변경 실패", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                        passwordChangeDialog.dismiss();
+                    }
+                });
             }
         });
     }

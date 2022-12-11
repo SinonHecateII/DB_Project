@@ -27,6 +27,7 @@
             android:exported="false" />
         <activity
             android:name=".pages.session.MyPageActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".utils.PopupActivity"

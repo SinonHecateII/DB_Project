@@ -66,6 +66,9 @@ public interface DeliciousAPI {
     @POST("/session/delete_account.php")
     Call<OnlyResultDTO> deleteAccountCall(@Body DeleteAccountDTO deleteAccountDTO);
 
+    @POST("/session/password_change.php")
+    Call<OnlyResultDTO> passwordChangeCall(@Body LoginDTO loginDTO);
+
 
     /*
         Restaurant
