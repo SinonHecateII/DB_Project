@@ -62,18 +62,18 @@ public class MyPageActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         /*
-        * 유저 닉네임 확인 및 수정 부분
-        * */
+         * 유저 닉네임 확인 및 수정 부분
+         * */
         // 유저 Nickname 가져오기
         name = SharedPreferenceHelper.INSTANCE.getNickname(getApplicationContext());
         UserName = (EditText) findViewById(R.id.tv_mypage_nickname);
         UserName.setText(name);
 
         // 엔터키 방지
-        UserName.setOnKeyListener(new View.OnKeyListener(){
+        UserName.setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event){
-                if(keyCode == event.KEYCODE_ENTER) return true;
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == event.KEYCODE_ENTER) return true;
                 return false;
             }
         });
@@ -88,17 +88,21 @@ public class MyPageActivity extends AppCompatActivity {
         });
 
         /*
-        * 작성한 리뷰 개수 확인 부분
-        * */
+         * 작성한 리뷰 개수 확인 부분
+         * */
         Written_Review = findViewById(R.id.btn_mypage_review);
         userID = SharedPreferenceHelper.INSTANCE.getLoginID(getApplicationContext());
 
         deliciousAPI.reviewSearchUserIdCall(new ReviewSearchUserIdDTO(userID)).enqueue(new Callback<ReviewSearchUserIdResponseDTO>() {
             @Override
             public void onResponse(Call<ReviewSearchUserIdResponseDTO> call, Response<ReviewSearchUserIdResponseDTO> response) {
-                if (response.isSuccessful()) {
-                    ReviewSearchUserIdResponseDTO reviewSearchResponseDTO = response.body();
-                    Written_Review.setText("총 "+ String.valueOf(reviewSearchResponseDTO.getResult().size()) + "건");
+                try {
+                    if (response.isSuccessful()) {
+                        ReviewSearchUserIdResponseDTO reviewSearchResponseDTO = response.body();
+                        Written_Review.setText("총 " + String.valueOf(reviewSearchResponseDTO.getResult().size()) + "건");
+                    }
+                }catch (Exception e){
+                    Written_Review.setText("총 0건");
                 }
             }
 
@@ -121,9 +125,13 @@ public class MyPageActivity extends AppCompatActivity {
         deliciousAPI.restaurantSearchWriterIdCall(new WriterIdDTO(userID)).enqueue(new Callback<RestaurantResponseDTO>() {
             @Override
             public void onResponse(Call<RestaurantResponseDTO> call, Response<RestaurantResponseDTO> response) {
-                if (response.isSuccessful()) {
-                    RestaurantResponseDTO restaurantResponseDTO = response.body();
-                    binding.btnMypageRestaurant.setText("총 "+ String.valueOf(restaurantResponseDTO.getResult().size()) + "건");
+                try {
+                    if (response.isSuccessful()) {
+                        RestaurantResponseDTO restaurantResponseDTO = response.body();
+                        binding.btnMypageRestaurant.setText("총 " + String.valueOf(restaurantResponseDTO.getResult().size()) + "건");
+                    }
+                } catch (Exception e) {
+                    binding.btnMypageRestaurant.setText("총 0건");
                 }
             }
 
@@ -141,8 +149,8 @@ public class MyPageActivity extends AppCompatActivity {
 
 
         /*
-        * 회원 탈퇴 버튼
-        * */
+         * 회원 탈퇴 버튼
+         * */
         DeleteAccountBtn = (Button) findViewById(R.id.tv_mypage_withdrawal);
         DeleteAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,6 +194,7 @@ public class MyPageActivity extends AppCompatActivity {
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<RegisterResponseDTO> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "문제가 발생했습니다.", Toast.LENGTH_SHORT).show();
